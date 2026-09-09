@@ -186,6 +186,16 @@ export const Navbar: React.FC = () => {
               <span>{language.toUpperCase()}</span>
             </button>
 
+            {/* Mobile Support Heart Button (Right next to Language Toggle) */}
+            <button
+              onClick={() => setSupportModalOpen(true)}
+              title={t('common.support')}
+              className="sm:hidden p-1.5 text-rose-400 hover:text-rose-300 hover:bg-zinc-800 rounded-full border border-zinc-800 flex items-center justify-center transition-colors"
+              aria-label={t('common.support')}
+            >
+              <Heart className="w-3.5 h-3.5 fill-rose-500 text-rose-500" />
+            </button>
+
             {/* Dark/Light Mode Toggle */}
             <button
               onClick={toggleTheme}
