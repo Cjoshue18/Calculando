@@ -1,0 +1,71 @@
+@import "tailwindcss";
+@import "katex/dist/katex.min.css";
+
+@theme {
+  --font-sans: 'Figtree', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Custom Palette from Google Color Picker */
+  --color-brand-primary: #5d95b3;
+  --color-brand-dark: #234968;
+  --color-brand-darker: #1c384a;
+  --color-brand-light: #f0f6f9;
+  --color-brand-tint: #e4eef4;
+  --color-brand-border: #b7d2e0;
+
+  --color-brand-dark-surface: #13222d;
+  --color-brand-dark-border: #254157;
+
+  /* Cal.com Design System Tokens */
+  --color-ink: #101010;
+  --color-paper: #f4f4f4;
+  --color-silver: #e5e7eb;
+  --color-graphite: #242424;
+
+  /* Cal.com & Quantum² Shadows */
+  --shadow-cal-card: 0px 4px 8px 0px rgba(34, 42, 53, 0.05);
+  --shadow-cal-elevated: 0px 1px 5px -4px rgba(36, 36, 36, 0.7), 0px 4px 8px 0px rgba(36, 36, 36, 0.05);
+}
+
+/* Quantum² Tracking Utilities */
+.tr-display { letter-spacing: -0.0572em; }
+.tr-title   { letter-spacing: -0.0570em; }
+.tr-heading { letter-spacing: -0.0200em; }
+.tr-body    { letter-spacing: -0.0475em; }
+.tr-ui      { letter-spacing: -0.0080em; }
+.tr-cta     { letter-spacing: -0.0200em; }
+
+
+@layer base {
+  html {
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    text-rendering: geometricPrecision;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Force tabular numbers in numeric contexts */
+  input[type="number"],
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(93, 149, 179, 0.35);
+  border-radius: 3px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(93, 149, 179, 0.25);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(93, 149, 179, 0.6);
+}

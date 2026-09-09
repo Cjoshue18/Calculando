@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculando — Cálculos rápidos. Sin rodeos.</title>
+    <meta name="description" content="Suite web de herramientas de cálculo académico, financiero y de tiempo. 100% precisa, rápida y sin rodeos." />
+    
+    <!-- Google Fonts: Figtree & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Schema.org SoftwareApplication -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Calculando",
+      "applicationCategory": "EducationalApplication, FinanceApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "description": "Herramientas de cálculo rápido para estudiantes universitarios, finanzas personales y gestión del tiempo."
+    }
+    </script>
+  </head>
+  <body class="h-full bg-slate-50 text-slate-900 dark:bg-zinc-950 dark:text-zinc-100 antialiased font-sans selection:bg-blue-500 selection:text-white transition-colors duration-150">
+    <div id="root" class="min-h-full flex flex-col"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
