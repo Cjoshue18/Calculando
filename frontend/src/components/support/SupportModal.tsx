@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Heart, ExternalLink, Coffee, QrCode } from 'lucide-react';
+import { X, Heart, ExternalLink, Coffee } from 'lucide-react';
 
 interface SupportModalProps {
   isOpen: boolean;
@@ -83,7 +83,7 @@ export const SupportModal: React.FC<SupportModalProps> = ({ isOpen, onClose }) =
               {/* Real Buy Me a Coffee QR Code */}
               <div className="mx-auto w-56 p-4 bg-white border border-slate-200 dark:border-zinc-700 rounded-2xl flex flex-col items-center justify-center shadow-sm">
                 <img 
-                  src="/bmc-qr.png" 
+                  src="/qr-code.webp" 
                   alt="Código QR Buy Me a Coffee" 
                   className="w-48 h-48 object-contain rounded-lg"
                 />
@@ -116,10 +116,14 @@ export const SupportModal: React.FC<SupportModalProps> = ({ isOpen, onClose }) =
                 Contribuye de forma rápida y directa mediante Yape o Plin. Cualquier aporte voluntario es bienvenido.
               </p>
 
-              {/* QR Mockup / SVG Box */}
-              <div className="mx-auto w-52 h-52 p-4 bg-white border border-slate-200 dark:border-zinc-700 rounded-xl flex flex-col items-center justify-center shadow-sm">
-                <QrCode className="w-40 h-40 text-zinc-900" strokeWidth={1.2} />
-                <span className="text-[11px] font-semibold text-slate-600 mt-2">
+              {/* Real Yape / Plin QR Code */}
+              <div className="mx-auto w-56 p-4 bg-white border border-slate-200 dark:border-zinc-700 rounded-2xl flex flex-col items-center justify-center shadow-sm">
+                <img 
+                  src="/qr-code-2.webp" 
+                  alt="Código QR Yape o Plin" 
+                  className="w-48 h-48 object-contain rounded-lg"
+                />
+                <span className="text-[11px] font-semibold text-slate-600 mt-2.5">
                   Escanea con Yape o Plin
                 </span>
               </div>
