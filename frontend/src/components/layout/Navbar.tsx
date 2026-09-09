@@ -23,6 +23,25 @@ export const Navbar: React.FC = () => {
   const [activeNavCategory, setActiveNavCategory] = useState<string>('academic');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [supportModalOpen, setSupportModalOpen] = useState(false);
+  const dropdownRef = React.useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside
+  React.useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setDropdownOpen(false);
+      }
+    };
+    if (dropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [dropdownOpen]);
+
+  // Close dropdown on navigation
+  React.useEffect(() => {
+    setDropdownOpen(false);
+  }, [location.pathname]);
 
   return (
     <>
@@ -52,17 +71,19 @@ export const Navbar: React.FC = () => {
                 Inicio
               </Link>
 
-              {/* Tools Cascading Dropdown */}
+              {/* Tools Cascading Dropdown (Click Only) */}
               <div 
+                ref={dropdownRef}
                 className="relative"
-                onMouseLeave={() => setDropdownOpen(false)}
               >
                 <button
+                  type="button"
                   onClick={() => setDropdownOpen(!dropdownOpen)}
-                  onMouseEnter={() => setDropdownOpen(true)}
-                  className={`px-3 py-1.5 rounded-full flex items-center gap-1 transition-colors ${
+                  className={`px-3 py-1.5 rounded-full flex items-center gap-1 transition-colors cursor-pointer ${
                     dropdownOpen ? 'text-white bg-zinc-800' : 'text-zinc-400 hover:text-white hover:bg-zinc-900'
                   }`}
+                  aria-expanded={dropdownOpen}
+                  aria-haspopup="true"
                 >
                   <span>Herramientas</span>
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform ${dropdownOpen ? 'rotate-180' : ''}`} />
