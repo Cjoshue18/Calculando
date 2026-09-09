@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import { toolRegistry, ToolCategory } from '@/core/registry/toolRegistry';
 import { useLanguage } from '@/context/LanguageContext';
+import { FloatingMathSymbols } from '@/components/home/FloatingMathSymbols';
 
 export const HomePage: React.FC = () => {
   const { language, t } = useLanguage();
@@ -40,7 +41,10 @@ export const HomePage: React.FC = () => {
           1. HERO SECTION (FIGTREE TIGHT TRACKING)
          ══════════════════════════════════════════════════════ */}
       <section className="relative pt-10 sm:pt-16 pb-12 sm:pb-16 overflow-hidden">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+        {/* Floating Ambient Math Symbols that disperse on scroll */}
+        <FloatingMathSymbols />
+
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center">
           {/* Eyebrow Pill */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#234968] dark:bg-[#5d95b3] text-white dark:text-zinc-950 text-xs font-semibold tracking-tight shadow-xs mb-5 animate-in fade-in slide-in-from-top-2 duration-300">
             <span className="w-1.5 h-1.5 rounded-full bg-[#5d95b3] dark:bg-zinc-950 animate-pulse" />
