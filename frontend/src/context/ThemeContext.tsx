@@ -14,17 +14,23 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [theme, setThemeState] = useState<Theme>(() => {
     const saved = localStorage.getItem('calculando-theme') as Theme;
     if (saved === 'light' || saved === 'dark') return saved;
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    return 'light'; // Siempre claro por defecto
   });
 
   useEffect(() => {
     const root = document.documentElement;
+    root.classList.add('theme-transition');
     if (theme === 'dark') {
       root.classList.add('dark');
     } else {
       root.classList.remove('dark');
     }
     localStorage.setItem('calculando-theme', theme);
+
+    const timer = setTimeout(() => {
+      root.classList.remove('theme-transition');
+    }, 300);
+    return () => clearTimeout(timer);
   }, [theme]);
 
   const toggleTheme = () => {

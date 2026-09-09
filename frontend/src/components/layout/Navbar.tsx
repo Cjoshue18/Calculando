@@ -198,11 +198,16 @@ export const Navbar: React.FC = () => {
 
             {/* Dark/Light Mode Toggle */}
             <button
+              type="button"
               onClick={toggleTheme}
               title={theme === 'dark' ? t('common.themeLight') : t('common.themeDark')}
-              className="p-1.5 text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-full border border-zinc-800 transition-colors"
+              className="p-1.5 text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-full border border-zinc-800 transition-all duration-200 transform active:scale-90 hover:scale-105 cursor-pointer"
             >
-              {theme === 'dark' ? <Sun className="w-3.5 h-3.5 text-amber-400" /> : <Moon className="w-3.5 h-3.5" />}
+              {theme === 'dark' ? (
+                <Sun className="w-3.5 h-3.5 text-amber-400 transition-transform duration-300 rotate-0 hover:rotate-45" />
+              ) : (
+                <Moon className="w-3.5 h-3.5 text-slate-200 transition-transform duration-300 rotate-0 hover:-rotate-12" />
+              )}
             </button>
 
             {/* Support CTA Button (Quantum² pill button style) */}
