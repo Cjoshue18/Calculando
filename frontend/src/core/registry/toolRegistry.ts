@@ -23,6 +23,7 @@ export interface ToolMetadata {
   icon: React.ComponentType<{ className?: string }>;
   isAvailable: boolean;
   badge?: string;
+  badgeEn?: string;
   keywords: string[];
 }
 
@@ -40,6 +41,7 @@ export const toolRegistry: ToolMetadata[] = [
     icon: GraduationCap,
     isAvailable: true,
     badge: 'Popular',
+    badgeEn: 'Popular',
     keywords: ['nota', 'promedio', 'examen final', 'universidad', 'urp', 'grade', 'passing'],
   },
   {
@@ -55,6 +57,7 @@ export const toolRegistry: ToolMetadata[] = [
     icon: Layers,
     isAvailable: false,
     badge: 'En desarrollo',
+    badgeEn: 'In development',
     keywords: ['gpa', 'creditos', 'ponderado', 'semestre', 'cursos'],
   },
   {
@@ -70,6 +73,7 @@ export const toolRegistry: ToolMetadata[] = [
     icon: Clock,
     isAvailable: false,
     badge: 'En desarrollo',
+    badgeEn: 'In development',
     keywords: ['tiempo', 'horas', 'minutos', 'reloj', 'duracion'],
   },
   {
@@ -85,6 +89,7 @@ export const toolRegistry: ToolMetadata[] = [
     icon: Landmark,
     isAvailable: false,
     badge: 'En desarrollo',
+    badgeEn: 'In development',
     keywords: ['prestamo', 'tea', 'tcea', 'banco', 'bcp', 'interbank', 'interes'],
   },
   {
@@ -100,6 +105,7 @@ export const toolRegistry: ToolMetadata[] = [
     icon: Receipt,
     isAvailable: false,
     badge: 'En desarrollo',
+    badgeEn: 'In development',
     keywords: ['igv', 'sunat', 'detraccion', 'factura', 'impuestos', 'peru'],
   },
   {
@@ -115,6 +121,7 @@ export const toolRegistry: ToolMetadata[] = [
     icon: Code2,
     isAvailable: false,
     badge: 'En desarrollo',
+    badgeEn: 'In development',
     keywords: ['mock', 'json', 'sql', 'database', 'c#', 'api'],
   },
 ];

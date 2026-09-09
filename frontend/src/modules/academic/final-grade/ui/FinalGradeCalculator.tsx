@@ -21,6 +21,7 @@ import { FinalGradeInput, Evaluation } from '../domain/types';
 import { useUrlStateSync } from '@/core/hooks/useUrlStateSync';
 import { useLocalStorageHistory } from '@/core/hooks/useLocalStorageHistory';
 import { useCopyToClipboard } from '@/core/hooks/useCopyToClipboard';
+import { useLanguage } from '@/context/LanguageContext';
 
 const defaultEvaluations: Evaluation[] = [
   { id: '1', name: 'Examen Parcial', score: 12, weight: 30 },
@@ -28,6 +29,7 @@ const defaultEvaluations: Evaluation[] = [
 ];
 
 export const FinalGradeCalculator: React.FC = () => {
+  const { language, t } = useLanguage();
   const { getInitialState } = useUrlStateSync<FinalGradeInput>();
   const { history, addHistoryItem, clearHistory } = useLocalStorageHistory<FinalGradeInput>('final-grade');
   const { copy } = useCopyToClipboard();
@@ -37,7 +39,7 @@ export const FinalGradeCalculator: React.FC = () => {
   const [supportModalOpen, setSupportModalOpen] = useState(false);
 
   // Initialize state from URL if shared, otherwise default
-  const [courseName, setCourseName] = useState('Mi Asignatura');
+  const [courseName, setCourseName] = useState(() => (language === 'en' ? 'My Subject' : 'Mi Asignatura'));
   const [maxScale, setMaxScale] = useState<number>(() => {
     const initial = getInitialState();
     return initial?.maxScale && initial.maxScale > 0 ? initial.maxScale : 20;
@@ -144,31 +146,40 @@ export const FinalGradeCalculator: React.FC = () => {
   };
 
   const handleSaveToHistory = () => {
-    const summary = `${courseName}: Requiere ${result.requiredFinalScore}/${maxScale} en final (Peso ${finalExamWeight}%)`;
+    const summary = `${courseName}: ${language === 'en' ? 'Requires' : 'Requiere'} ${result.requiredFinalScore}/${maxScale} ${language === 'en' ? 'on final (Weight' : 'en final (Peso'} ${finalExamWeight}%)`;
     addHistoryItem(summary, currentInput);
-    triggerToast('Cálculo guardado en historial');
+    triggerToast(language === 'en' ? 'Calculation saved to history' : 'Cálculo guardado en historial');
   };
 
   const handleShareUrl = async () => {
     const cleanUrl = `${window.location.origin}${window.location.pathname}`;
     await copy(cleanUrl);
-    triggerToast('Enlace de la herramienta copiado al portapapeles');
+    triggerToast(language === 'en' ? 'Tool link copied to clipboard' : 'Enlace de la herramienta copiado al portapapeles');
   };
+
+  const statusMessage = useMemo(() => {
+    if (result.status === 'approved') return t('finalGrade.statusApproved');
+    if (result.status === 'feasible') return t('finalGrade.statusFeasible');
+    if (result.status === 'challenging') return t('finalGrade.statusChallenging');
+    return language === 'en'
+      ? `Mathematically unattainable with the regular final exam (requires ${result.requiredFinalScore} out of ${maxScale}). Consider preparing for makeup or substitute exam.`
+      : `Matemáticamente inalcanzable con el examen final ordinario (requiere ${result.requiredFinalScore} sobre ${maxScale}). Considera preparar el examen sustitutorio o aplazados.`;
+  }, [result.status, result.requiredFinalScore, maxScale, language, t]);
 
   const handleCopyWhatsappSummary = async () => {
     const cleanUrl = `${window.location.origin}${window.location.pathname}`;
     const text = [
-      `*Calculando — Nota Requerida en Examen Final*`,
-      `Curso: ${courseName}`,
-      `Escala máxima: ${maxScale}`,
-      `Puntos acumulados: ${result.accumulatedPoints} pts`,
-      `Peso del final: ${finalExamWeight}%`,
-      `*Nota requerida: ${result.requiredFinalScore} / ${maxScale}*`,
-      `Estado: ${result.statusMessage}`,
-      `Calcula el tuyo: ${cleanUrl}`,
+      language === 'en' ? '*Calculando — Required Final Exam Score*' : '*Calculando — Nota Requerida en Examen Final*',
+      `${language === 'en' ? 'Course' : 'Curso'}: ${courseName}`,
+      `${language === 'en' ? 'Scale' : 'Escala máxima'}: ${maxScale}`,
+      `${language === 'en' ? 'Points accumulated' : 'Puntos acumulados'}: ${result.accumulatedPoints} pts`,
+      `${language === 'en' ? 'Final weight' : 'Peso del final'}: ${finalExamWeight}%`,
+      `*${language === 'en' ? 'Required score' : 'Nota requerida'}: ${result.requiredFinalScore} / ${maxScale}*`,
+      `${language === 'en' ? 'Status' : 'Estado'}: ${statusMessage}`,
+      `${language === 'en' ? 'Calculate yours' : 'Calcula el tuyo'}: ${cleanUrl}`,
     ].join('\n');
     await copy(text);
-    triggerToast('Resumen copiado para WhatsApp');
+    triggerToast(t('finalGrade.summaryCopied'));
   };
 
   const handleRestoreHistoryItem = (item: FinalGradeInput) => {
@@ -176,7 +187,7 @@ export const FinalGradeCalculator: React.FC = () => {
     setPassingThreshold(item.passingThreshold);
     setEvaluations(item.evaluations);
     setFinalExamWeight(item.finalExamWeight);
-    triggerToast('Cálculo restaurado desde historial');
+    triggerToast(language === 'en' ? 'Calculation restored from history' : 'Cálculo restaurado desde historial');
   };
 
   // Status visual styles
@@ -184,22 +195,22 @@ export const FinalGradeCalculator: React.FC = () => {
     approved: {
       badge: 'bg-emerald-600 text-white',
       accentColor: 'text-emerald-700 dark:text-emerald-400',
-      label: 'Curso Aprobado',
+      label: t('finalGrade.statusApprovedBadge'),
     },
     feasible: {
       badge: 'bg-[#234968] text-white',
       accentColor: 'text-[#234968] dark:text-[#5d95b3]',
-      label: 'Alcanzable',
+      label: t('finalGrade.statusFeasibleBadge'),
     },
     challenging: {
       badge: 'bg-amber-600 text-white',
       accentColor: 'text-amber-700 dark:text-amber-400',
-      label: 'Exigente',
+      label: t('finalGrade.statusChallengingBadge'),
     },
     impossible: {
       badge: 'bg-rose-600 text-white',
       accentColor: 'text-rose-700 dark:text-rose-400',
-      label: 'Inalcanzable en Ordinario',
+      label: t('finalGrade.statusImpossibleBadge'),
     },
   }[result.status];
 
@@ -210,15 +221,15 @@ export const FinalGradeCalculator: React.FC = () => {
          ══════════════════════════════════════════════════════ */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2">
         <div className="flex items-start gap-3.5">
-          <div className="p-2.5 rounded-xl bg-[#f0f6f9] dark:bg-[#13222d] text-[#234968] dark:text-[#5d95b3] border border-[#b7d2e0] dark:border-[#254157] shadow-xs">
+          <div className="p-2.5 rounded-xl bg-slate-100 dark:bg-zinc-800 text-[#234968] dark:text-[#5d95b3] shadow-xs">
             <GraduationCap className="w-6 h-6" />
           </div>
           <div>
             <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
-              ¿Cuánto necesito sacar en el examen final?
+              {t('finalGrade.pageTitle')}
             </h1>
             <p className="mt-1 text-sm text-slate-500 dark:text-zinc-400 max-w-2xl leading-relaxed">
-              Calcula la nota mínima requerida según tus evaluaciones previas. Adaptable a la escala de cualquier país o universidad.
+              {t('finalGrade.pageSubtitle')}
             </p>
           </div>
         </div>
@@ -227,15 +238,15 @@ export const FinalGradeCalculator: React.FC = () => {
         <div className="flex items-center gap-2 self-start sm:self-center shrink-0">
           <button
             onClick={handleShareUrl}
-            title="Compartir enlace con estos datos"
+            title={t('finalGrade.shareTitle')}
             className="px-3.5 py-1.5 text-xs font-semibold text-slate-700 dark:text-zinc-200 bg-white dark:bg-zinc-800 hover:bg-slate-50 dark:hover:bg-zinc-700 border border-slate-200 dark:border-zinc-700 rounded-full flex items-center gap-1.5 shadow-xs transition-colors"
           >
             <Share2 className="w-3.5 h-3.5 text-[#5d95b3]" />
-            <span>Compartir</span>
+            <span>{t('finalGrade.shareBtn')}</span>
           </button>
           <button
             onClick={handleReset}
-            title="Reiniciar a valores por defecto"
+            title={t('finalGrade.resetTitle')}
             className="p-1.5 text-slate-500 hover:text-slate-800 dark:text-zinc-400 dark:hover:text-zinc-200 bg-white dark:bg-zinc-800 hover:bg-slate-50 dark:hover:bg-zinc-700 border border-slate-200 dark:border-zinc-700 rounded-full transition-colors shadow-xs"
           >
             <RotateCcw className="w-3.5 h-3.5" />
@@ -253,14 +264,14 @@ export const FinalGradeCalculator: React.FC = () => {
           <div className="flex items-center justify-between border-b border-slate-100 dark:border-zinc-800 pb-3.5">
             <div>
               <h2 className="text-base font-bold text-slate-900 dark:text-white tracking-tight">
-                Ingresa tus notas y ponderaciones
+                {t('finalGrade.inputTitle')}
               </h2>
               <p className="text-xs text-slate-500 dark:text-zinc-400 mt-0.5">
-                Valores validados con redondeo aritmético oficial
+                {t('finalGrade.inputSubtitle')}
               </p>
             </div>
             <span className="text-[11px] font-mono text-slate-400 dark:text-zinc-500">
-              Ponderación actual: <strong className="text-slate-900 dark:text-zinc-200">{result.accumulatedWeight}%</strong>
+              {language === 'en' ? 'Current weight:' : 'Ponderación actual:'} <strong className="text-slate-900 dark:text-zinc-200">{result.accumulatedWeight}%</strong>
             </span>
           </div>
 
@@ -270,13 +281,13 @@ export const FinalGradeCalculator: React.FC = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-zinc-400 mb-1.5">
-                  Nombre de Asignatura (Opcional)
+                  {language === 'en' ? 'Course Name (Optional)' : 'Nombre de Asignatura (Opcional)'}
                 </label>
                 <input
                   type="text"
                   value={courseName}
                   onChange={(e) => setCourseName(e.target.value)}
-                  placeholder="Ej. Cálculo II, Finanzas..."
+                  placeholder={language === 'en' ? 'e.g. Calculus II, Finance...' : 'Ej. Cálculo II, Finanzas...'}
                   className="w-full px-3 py-2 text-sm bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-700 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-[#5d95b3] text-slate-900 dark:text-zinc-100 transition-all"
                 />
               </div>
@@ -285,7 +296,7 @@ export const FinalGradeCalculator: React.FC = () => {
               <div>
                 <div className="flex items-center justify-between mb-1.5">
                   <label className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-zinc-400">
-                    Nota Máxima de tu País / Sistema
+                    {language === 'en' ? 'Maximum Grade Scale' : 'Nota Máxima de tu País / Sistema'}
                   </label>
                 </div>
                 <div className="flex items-center gap-2">
@@ -300,7 +311,7 @@ export const FinalGradeCalculator: React.FC = () => {
                       className="w-full px-3 py-2 text-sm font-mono tabular-nums bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-700 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-[#5d95b3] text-slate-900 dark:text-zinc-100 transition-all font-bold"
                     />
                     <span className="absolute right-2.5 top-2 text-xs font-mono text-slate-400 pointer-events-none">
-                      máx
+                      max
                     </span>
                   </div>
                   <div className="flex gap-1">
@@ -326,7 +337,7 @@ export const FinalGradeCalculator: React.FC = () => {
             {/* Passing threshold row */}
             <div>
               <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-zinc-400 mb-1.5">
-                Nota Mínima Aprobatoria (0 a {maxScale})
+                {t('finalGrade.minPassingGrade')} (0 - {maxScale})
               </label>
               <div className="flex items-center gap-2">
                 <input
@@ -356,7 +367,7 @@ export const FinalGradeCalculator: React.FC = () => {
                 </div>
               </div>
               <p className="mt-1 text-[11px] text-slate-400 dark:text-zinc-500">
-                Puntaje mínimo requerido en el sílabo para no desaprobar la materia.
+                {t('finalGrade.passingThresholdHelp')}
               </p>
             </div>
           </div>
@@ -364,7 +375,7 @@ export const FinalGradeCalculator: React.FC = () => {
           {/* Dynamic Evaluation Rows */}
           <div className="space-y-3 pt-2">
             <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-zinc-400">
-              Evaluaciones Rendidas a la Fecha
+              {t('finalGrade.evaluations')}
             </label>
 
             <div className="space-y-2">
@@ -378,7 +389,7 @@ export const FinalGradeCalculator: React.FC = () => {
                       type="text"
                       value={ev.name}
                       onChange={(e) => handleUpdateEvaluation(ev.id, 'name', e.target.value)}
-                      placeholder={`Evaluación ${index + 1}`}
+                      placeholder={`${t('finalGrade.evalName')} ${index + 1}`}
                       className="w-full px-3 py-1.5 text-xs sm:text-sm bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-700 rounded-lg text-slate-800 dark:text-zinc-200 focus:outline-hidden focus:ring-1 focus:ring-[#5d95b3]"
                     />
                   </div>
@@ -391,7 +402,7 @@ export const FinalGradeCalculator: React.FC = () => {
                         max={maxScale}
                         value={ev.score}
                         onChange={(e) => handleUpdateEvaluation(ev.id, 'score', e.target.value)}
-                        placeholder="Nota"
+                        placeholder={language === 'en' ? 'Score' : 'Nota'}
                         className="w-full px-3 py-1.5 text-xs sm:text-sm font-mono tabular-nums bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-700 rounded-lg text-slate-900 dark:text-white focus:outline-hidden focus:ring-1 focus:ring-[#5d95b3]"
                       />
                       <span className="absolute right-2.5 top-1.5 text-xs font-mono text-slate-400 pointer-events-none">
@@ -420,7 +431,7 @@ export const FinalGradeCalculator: React.FC = () => {
                       type="button"
                       onClick={() => handleRemoveEvaluation(ev.id)}
                       disabled={evaluations.length <= 1}
-                      title="Eliminar evaluación"
+                      title={t('finalGrade.remove')}
                       className="p-1.5 text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -436,21 +447,21 @@ export const FinalGradeCalculator: React.FC = () => {
               className="mt-2 inline-flex items-center gap-1.5 px-3 py-2 border border-dashed border-slate-300 dark:border-zinc-700 hover:border-[#5d95b3] dark:hover:border-[#5d95b3] rounded-lg text-xs font-medium text-slate-600 dark:text-zinc-400 hover:text-[#234968] dark:hover:text-[#5d95b3] transition-colors w-full justify-center"
             >
               <Plus className="w-3.5 h-3.5" />
-              <span>Agregar otra evaluación</span>
+              <span>{t('finalGrade.addEvaluation')}</span>
             </button>
           </div>
 
           {/* Final Exam Weight Card */}
-          <div className="p-4 bg-[#f0f6f9]/80 dark:bg-[#13222d]/60 border border-[#b7d2e0] dark:border-[#254157] rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="p-4 bg-slate-50 dark:bg-zinc-950/80 border border-slate-200 dark:border-zinc-800 rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
               <div className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                <span>Peso del Examen Final</span>
+                <span>{t('finalGrade.finalExamWeight')}</span>
                 <span className="text-[10px] px-2 py-0.5 bg-[#234968] text-white font-mono rounded-full">
-                  Obligatorio
+                  {language === 'en' ? 'Required' : 'Obligatorio'}
                 </span>
               </div>
               <p className="text-xs text-slate-500 dark:text-zinc-400 mt-0.5">
-                Porcentaje asignado al examen final en el sílabo académico.
+                {language === 'en' ? 'Percentage allocated to the final exam in syllabus.' : 'Porcentaje asignado al examen final en el sílabo académico.'}
               </p>
             </div>
             <div className="w-full sm:w-36 relative">
@@ -461,7 +472,7 @@ export const FinalGradeCalculator: React.FC = () => {
                 value={finalExamWeight}
                 onChange={(e) => setFinalExamWeight(e.target.value === '' ? '' : Number(e.target.value))}
                 placeholder="Ej. 40"
-                className="w-full px-3 py-2 text-base font-mono tabular-nums bg-white dark:bg-zinc-900 border border-[#b7d2e0] dark:border-[#254157] rounded-lg text-[#234968] dark:text-[#5d95b3] font-bold focus:outline-hidden focus:ring-2 focus:ring-[#5d95b3]"
+                className="w-full px-3 py-2 text-base font-mono tabular-nums bg-white dark:bg-zinc-900 border border-slate-300 dark:border-zinc-700 rounded-lg text-[#234968] dark:text-[#5d95b3] font-bold focus:outline-hidden focus:ring-2 focus:ring-[#5d95b3]"
               />
               <span className="absolute right-3 top-2.5 text-sm font-mono font-semibold text-[#5d95b3] pointer-events-none">
                 %
@@ -474,7 +485,11 @@ export const FinalGradeCalculator: React.FC = () => {
             <div className="p-3.5 bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/50 rounded-lg flex items-center gap-2.5 text-xs text-amber-800 dark:text-amber-300">
               <AlertTriangle className="w-4 h-4 shrink-0 text-amber-600 dark:text-amber-400" />
               <span>
-                La suma de pesos asignados es <strong>{result.totalAllocatedWeight}%</strong>. Para un cálculo exacto debe sumar el 100%.
+                {language === 'en' ? (
+                  <>Total allocated weight is <strong>{result.totalAllocatedWeight}%</strong>. Must equal 100% for an exact calculation.</>
+                ) : (
+                  <>La suma de pesos asignados es <strong>{result.totalAllocatedWeight}%</strong>. Para un cálculo exacto debe sumar el 100%.</>
+                )}
               </span>
             </div>
           )}
@@ -482,12 +497,12 @@ export const FinalGradeCalculator: React.FC = () => {
 
         {/* ── RIGHT COLUMN: Sticky Instant Results Card (~42% / 5 cols) ── */}
         <div className="lg:col-span-5 lg:sticky lg:top-20 space-y-4">
-          <div className="bg-[#f0f6f9] dark:bg-[#13222d] border border-[#b7d2e0] dark:border-[#254157] border-l-4 border-l-[#5d95b3] rounded-xl p-6 shadow-cal-card space-y-5">
+          <div className="bg-slate-50 dark:bg-zinc-950/80 border border-slate-200 dark:border-zinc-800 border-l-4 border-l-[#5d95b3] rounded-xl p-6 shadow-cal-card space-y-5">
             
             {/* Status Header */}
-            <div className="flex items-center justify-between pb-3 border-b border-[#b7d2e0]/60 dark:border-[#254157]">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-zinc-800">
               <span className="text-xs font-semibold text-slate-500 dark:text-zinc-400">
-                Resultado de Aprobación
+                {t('finalGrade.results')}
               </span>
               <span className={`text-[11px] font-semibold px-2.5 py-0.5 rounded-full ${statusStyles.badge}`}>
                 {statusStyles.label}
@@ -497,7 +512,7 @@ export const FinalGradeCalculator: React.FC = () => {
             {/* Big Monospace Number */}
             <div>
               <div className="text-xs font-semibold text-slate-500 dark:text-zinc-400">
-                Nota mínima necesaria en el examen final:
+                {t('finalGrade.neededScore')}:
               </div>
               <div className="mt-1 flex items-baseline gap-2">
                 <span className="text-5xl font-black font-mono tabular-nums tracking-tight text-slate-900 dark:text-white">
@@ -508,18 +523,18 @@ export const FinalGradeCalculator: React.FC = () => {
                 </span>
               </div>
               <p className="mt-2 text-xs font-medium text-slate-600 dark:text-zinc-300 leading-relaxed">
-                {result.statusMessage}
+                {statusMessage}
               </p>
             </div>
 
             {/* Metric Box: Accumulated Points */}
-            <div className="p-3 bg-white/80 dark:bg-zinc-900/80 border border-[#b7d2e0] dark:border-[#254157] rounded-lg flex items-center justify-between">
+            <div className="p-3 bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-lg flex items-center justify-between">
               <div>
                 <div className="text-[10px] font-mono uppercase tracking-wider text-slate-400 dark:text-zinc-500">
-                  Puntos acumulados a la fecha
+                  {language === 'en' ? 'Points accumulated to date' : 'Puntos acumulados a la fecha'}
                 </div>
                 <div className="text-xs text-slate-600 dark:text-zinc-300 font-medium">
-                  {result.accumulatedWeight}% del curso completado
+                  {result.accumulatedWeight}% {language === 'en' ? 'of course completed' : 'del curso completado'}
                 </div>
               </div>
               <div className="text-lg font-bold font-mono tabular-nums text-[#234968] dark:text-[#5d95b3]">
@@ -532,30 +547,30 @@ export const FinalGradeCalculator: React.FC = () => {
               <button
                 type="button"
                 onClick={handleCopyWhatsappSummary}
-                className="w-full py-2.5 px-4 bg-[#234968] hover:bg-[#1a374e] text-white rounded-full text-xs font-bold flex items-center justify-center gap-2 shadow-xs transition-colors"
+                className="w-full py-2.5 px-4 bg-[#234968] hover:bg-[#1a374e] text-white rounded-full text-xs font-bold flex items-center justify-center gap-2 shadow-xs transition-colors cursor-pointer"
               >
                 <Copy className="w-3.5 h-3.5" />
-                <span>Copiar resumen para WhatsApp</span>
+                <span>{t('finalGrade.copySummary')}</span>
               </button>
 
               <div className="flex gap-2">
                 <button
                   type="button"
                   onClick={handleShareUrl}
-                  className="flex-1 py-2 px-3 bg-white dark:bg-zinc-900 hover:bg-slate-50 dark:hover:bg-zinc-800 border border-slate-200 dark:border-zinc-700 text-slate-700 dark:text-zinc-300 rounded-full text-xs font-medium flex items-center justify-center gap-1.5 transition-colors shadow-2xs"
+                  className="flex-1 py-2 px-3 bg-white dark:bg-zinc-900 hover:bg-slate-50 dark:hover:bg-zinc-800 border border-slate-200 dark:border-zinc-700 text-slate-700 dark:text-zinc-300 rounded-full text-xs font-medium flex items-center justify-center gap-1.5 transition-colors shadow-2xs cursor-pointer"
                 >
                   <Share2 className="w-3.5 h-3.5 text-[#5d95b3]" />
-                  <span>Compartir enlace</span>
+                  <span>{t('common.share')}</span>
                 </button>
 
                 <button
                   type="button"
                   onClick={handleSaveToHistory}
-                  title="Guardar en historial de cálculos"
-                  className="px-3.5 py-2 bg-white dark:bg-zinc-900 hover:bg-slate-50 dark:hover:bg-zinc-800 border border-slate-200 dark:border-zinc-700 text-slate-600 dark:text-zinc-300 rounded-full text-xs font-medium flex items-center justify-center gap-1 transition-colors shadow-2xs"
+                  title={language === 'en' ? 'Save calculation' : 'Guardar en historial de cálculos'}
+                  className="px-3.5 py-2 bg-white dark:bg-zinc-900 hover:bg-slate-50 dark:hover:bg-zinc-800 border border-slate-200 dark:border-zinc-700 text-slate-600 dark:text-zinc-300 rounded-full text-xs font-medium flex items-center justify-center gap-1 transition-colors shadow-2xs cursor-pointer"
                 >
                   <Bookmark className="w-3.5 h-3.5 text-[#5d95b3]" />
-                  <span>Guardar</span>
+                  <span>{language === 'en' ? 'Save' : 'Guardar'}</span>
                 </button>
               </div>
             </div>
@@ -569,20 +584,20 @@ export const FinalGradeCalculator: React.FC = () => {
       <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-xl p-6 shadow-cal-card space-y-4">
         <div>
           <div className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#5d95b3]">
-            Transparencia Matemática
+            {language === 'en' ? 'Mathematical Proof' : 'Transparencia Matemática'}
           </div>
           <h3 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight">
-            📐 Demostración Formal del Promedio Ponderado
+            📐 {t('finalGrade.formulaBreakdown')}
           </h3>
           <p className="mt-1 text-xs text-slate-500 dark:text-zinc-400 leading-relaxed">
-            La nota requerida se deduce despejando la incógnita del examen final en el sistema de ponderación para escala de 0 a {maxScale}:
+            {t('finalGrade.formulaExplanation')} (0 - {maxScale}):
           </p>
         </div>
 
         {/* LaTeX Canonical Equation */}
         <div className="p-4 bg-slate-50 dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 rounded-xl">
           <div className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 dark:text-zinc-500 mb-2">
-            Ecuación Canónica
+            {language === 'en' ? 'Canonical Equation' : 'Ecuación Canónica'}
           </div>
           <MathView 
             math={result.canonicalLatex} 
@@ -591,9 +606,9 @@ export const FinalGradeCalculator: React.FC = () => {
         </div>
 
         {/* LaTeX Substitution with Current User Values */}
-        <div className="p-4 bg-[#f0f6f9]/80 dark:bg-[#13222d]/60 border border-[#b7d2e0] dark:border-[#254157] rounded-xl">
+        <div className="p-4 bg-slate-50 dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 rounded-xl">
           <div className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#234968] dark:text-[#5d95b3] mb-2">
-            Sustitución con tus Valores Actuales (Escala 0-{maxScale})
+            {language === 'en' ? `Substitution with your Current Values (Scale 0-${maxScale})` : `Sustitución con tus Valores Actuales (Escala 0-${maxScale})`}
           </div>
           <MathView 
             math={result.substitutionLatex} 
@@ -605,7 +620,7 @@ export const FinalGradeCalculator: React.FC = () => {
         {result.formulaSteps && result.formulaSteps.length > 0 && (
           <div className="pt-2 border-t border-slate-100 dark:border-zinc-800">
             <div className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-zinc-400 mb-2">
-              Desglose Paso a Paso:
+              {language === 'en' ? 'Step-by-Step Breakdown:' : 'Desglose Paso a Paso:'}
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 font-mono text-xs text-slate-600 dark:text-zinc-400">
               {result.formulaSteps.map((step, idx) => (
@@ -623,48 +638,52 @@ export const FinalGradeCalculator: React.FC = () => {
           4. COMMUNITY SUPPORT & GROWTH SECTION (SIDE BY SIDE)
          ══════════════════════════════════════════════════════ */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {/* Growth Card A: Google Discover */}
+        {/* Growth Card A: Bookmark */}
         <div className="p-5 bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-xl shadow-cal-card flex flex-col justify-between">
           <div>
             <div className="flex items-center gap-2 text-xs font-bold text-slate-900 dark:text-white mb-1">
               <span className="text-amber-500">⭐</span>
-              <span>Agrégala a tus marcadores</span>
+              <span>{language === 'en' ? 'Add to Bookmarks' : 'Agrégala a tus marcadores'}</span>
             </div>
             <p className="text-xs text-slate-500 dark:text-zinc-400 leading-relaxed">
-              Guarda esta página con <kbd className="px-1.5 py-0.5 bg-slate-100 dark:bg-zinc-800 rounded font-mono text-[10px]">Ctrl + D</kbd> para tenerla siempre lista en cada ciclo de estudios.
+              {language === 'en' ? (
+                <>Save this page with <kbd className="px-1.5 py-0.5 bg-slate-100 dark:bg-zinc-800 rounded font-mono text-[10px]">Ctrl + D</kbd> to have it ready each semester.</>
+              ) : (
+                <>Guarda esta página con <kbd className="px-1.5 py-0.5 bg-slate-100 dark:bg-zinc-800 rounded font-mono text-[10px]">Ctrl + D</kbd> para tenerla siempre lista en cada ciclo de estudios.</>
+              )}
             </p>
           </div>
           <div className="mt-4">
             <button
               onClick={() => {
-                alert('Presiona Ctrl + D (Cmd + D en Mac) para guardar esta calculadora en tus marcadores');
+                alert(language === 'en' ? 'Press Ctrl + D (Cmd + D on Mac) to bookmark this calculator' : 'Presiona Ctrl + D (Cmd + D en Mac) para guardar esta calculadora en tus marcadores');
               }}
-              className="px-4 py-2 bg-slate-100 dark:bg-zinc-800 hover:bg-slate-200 dark:hover:bg-zinc-700 text-slate-800 dark:text-zinc-200 text-xs font-bold rounded-full transition-colors flex items-center gap-1.5"
+              className="px-4 py-2 bg-slate-100 dark:bg-zinc-800 hover:bg-slate-200 dark:hover:bg-zinc-700 text-slate-800 dark:text-zinc-200 text-xs font-bold rounded-full transition-colors flex items-center gap-1.5 cursor-pointer"
             >
               <Bookmark className="w-3.5 h-3.5 text-[#5d95b3]" />
-              <span>Guardar en Marcadores</span>
+              <span>{language === 'en' ? 'Bookmark Tool' : 'Guardar en Marcadores'}</span>
             </button>
           </div>
         </div>
 
         {/* Growth Card B: Support with Coffee / Yape */}
-        <div className="p-5 bg-[#f0f6f9] dark:bg-[#13222d] border border-[#b7d2e0] dark:border-[#254157] rounded-xl shadow-cal-card flex flex-col justify-between">
+        <div className="p-5 bg-slate-50 dark:bg-zinc-950/80 border border-slate-200 dark:border-zinc-800 rounded-xl shadow-cal-card flex flex-col justify-between">
           <div>
             <div className="flex items-center gap-2 text-xs font-bold text-[#234968] dark:text-[#5d95b3] mb-1">
               <Coffee className="w-4 h-4" />
-              <span>¿Te fue de utilidad?</span>
+              <span>{language === 'en' ? 'Found this useful?' : '¿Te fue de utilidad?'}</span>
             </div>
             <p className="text-xs text-slate-600 dark:text-zinc-300 leading-relaxed">
-              Calculando es una suite de cálculo rápido y privado. Tu apoyo voluntario contribuye al mantenimiento del servicio.
+              {language === 'en' ? 'Calculando is a fast, 100% private math utility suite. Your support helps keep it free and independent.' : 'Calculando es una suite de cálculo rápido y privado. Tu apoyo voluntario contribuye al mantenimiento del servicio.'}
             </p>
           </div>
           <div className="mt-4">
             <button
               onClick={() => setSupportModalOpen(true)}
-              className="px-4 py-2 bg-[#234968] hover:bg-[#1a374e] text-white text-xs font-bold rounded-full shadow-xs transition-colors flex items-center gap-1.5"
+              className="px-4 py-2 bg-[#234968] hover:bg-[#1a374e] text-white text-xs font-bold rounded-full shadow-xs transition-colors flex items-center gap-1.5 cursor-pointer"
             >
               <Coffee className="w-3.5 h-3.5" />
-              <span>Apoyar el proyecto</span>
+              <span>{t('common.support')}</span>
             </button>
           </div>
         </div>
@@ -678,13 +697,13 @@ export const FinalGradeCalculator: React.FC = () => {
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-zinc-400">
               <History className="w-4 h-4 text-[#5d95b3]" />
-              <span>Historial Local de Cálculos</span>
+              <span>{t('finalGrade.historyTitle')}</span>
             </div>
             <button
               onClick={clearHistory}
-              className="text-[11px] text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 transition-colors font-medium"
+              className="text-[11px] text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 transition-colors font-medium cursor-pointer"
             >
-              Limpiar historial
+              {t('common.clearHistory')}
             </button>
           </div>
           <div className="space-y-2">
@@ -715,7 +734,11 @@ export const FinalGradeCalculator: React.FC = () => {
       <div className="p-4 bg-slate-50 dark:bg-zinc-950/60 border border-slate-200 dark:border-zinc-800 rounded-xl flex items-start gap-3 text-xs text-slate-500 dark:text-zinc-400">
         <Info className="w-4 h-4 shrink-0 text-[#5d95b3] mt-0.5" />
         <div>
-          <strong>Criterio de Redondeo:</strong> Esta herramienta aplica redondeo aritmético estándar a dos decimales. Revisa el reglamento interno de tu institución para confirmar si el redondeo al entero más favorable se aplica en las notas parciales o exclusivamente en el acta final.
+          {language === 'en' ? (
+            <><strong>Rounding Notice:</strong> This calculator applies formal standard arithmetic rounding to 2 decimal places. Verify your university regulations to confirm if rounding applies to partial evaluations or only on the final transcript.</>
+          ) : (
+            <><strong>Criterio de Redondeo:</strong> Esta herramienta aplica redondeo aritmético estándar a dos decimales. Revisa el reglamento interno de tu institución para confirmar si el redondeo al entero más favorable se aplica en las notas parciales o exclusivamente en el acta final.</>
+          )}
         </div>
       </div>
 

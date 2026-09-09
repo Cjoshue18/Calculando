@@ -68,7 +68,7 @@ export const Navbar: React.FC = () => {
                     : 'text-zinc-400 hover:text-white hover:bg-zinc-900'
                 }`}
               >
-                Inicio
+                {t('common.home')}
               </Link>
 
               {/* Tools Cascading Dropdown (Click Only) */}
@@ -85,7 +85,7 @@ export const Navbar: React.FC = () => {
                   aria-expanded={dropdownOpen}
                   aria-haspopup="true"
                 >
-                  <span>Herramientas</span>
+                  <span>{t('common.tools')}</span>
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform ${dropdownOpen ? 'rotate-180' : ''}`} />
                 </button>
 
@@ -94,13 +94,13 @@ export const Navbar: React.FC = () => {
                     {/* Left Column: Categories */}
                     <div className="w-48 bg-zinc-900/90 border-r border-zinc-800 p-2 space-y-1">
                       <div className="px-2.5 py-1 text-[10px] font-bold text-zinc-500 uppercase tracking-wider">
-                        Categorías
+                        {t('common.categoriesWord')}
                       </div>
                       {[
-                        { id: 'academic', label: 'Académico' },
-                        { id: 'finance', label: 'Finanzas' },
-                        { id: 'time', label: 'Tiempo & Horas' },
-                        { id: 'dev', label: 'Desarrolladores' },
+                        { id: 'academic' as const, label: t('common.categories.academic') },
+                        { id: 'finance' as const, label: t('common.categories.finance') },
+                        { id: 'time' as const, label: t('common.categories.time') },
+                        { id: 'dev' as const, label: t('common.categories.dev') },
                       ].map((cat) => (
                         <button
                           key={cat.id}
@@ -121,13 +121,14 @@ export const Navbar: React.FC = () => {
                     {/* Right Column: Tools in Active Category */}
                     <div className="flex-1 p-2 space-y-1 bg-zinc-950">
                       <div className="px-2.5 py-1 text-[10px] font-bold text-[#5d95b3] uppercase tracking-wider">
-                        Herramientas
+                        {t('common.tools')}
                       </div>
                       {toolRegistry
                         .filter((t) => t.category === activeNavCategory)
                         .map((tool) => {
                           const IconComponent = tool.icon;
                           const name = language === 'en' ? tool.defaultNameEn : tool.defaultNameEs;
+                          const badge = language === 'en' ? (tool.badgeEn || tool.badge) : tool.badge;
 
                           if (tool.isAvailable) {
                             return (
@@ -141,9 +142,9 @@ export const Navbar: React.FC = () => {
                                   <IconComponent className="w-3.5 h-3.5 text-[#5d95b3]" />
                                   <span className="font-medium group-hover:text-white">{name}</span>
                                 </div>
-                                {tool.badge && (
+                                {badge && (
                                   <span className="text-[9px] px-1.5 py-0.5 rounded-full font-mono bg-emerald-950 text-emerald-300 border border-emerald-800/40">
-                                    {tool.badge}
+                                    {badge}
                                   </span>
                                 )}
                               </Link>
@@ -159,9 +160,9 @@ export const Navbar: React.FC = () => {
                                 <IconComponent className="w-3.5 h-3.5 text-zinc-600" />
                                 <span>{name}</span>
                               </div>
-                              {tool.badge && (
+                              {badge && (
                                 <span className="text-[9px] px-1.5 py-0.5 rounded-full font-mono bg-zinc-900 text-zinc-500 border border-zinc-800">
-                                  {tool.badge}
+                                  {badge}
                                 </span>
                               )}
                             </div>
@@ -237,14 +238,14 @@ export const Navbar: React.FC = () => {
               onClick={() => setMobileMenuOpen(false)}
               className="block px-3 py-2 rounded-xl text-sm font-medium text-zinc-200 hover:bg-zinc-900"
             >
-              Inicio
+              {t('common.home')}
             </Link>
             <div className="space-y-2 mt-2 max-h-[60vh] overflow-y-auto pr-1">
               {[
-                { id: 'academic', label: 'Académico' },
-                { id: 'finance', label: 'Finanzas' },
-                { id: 'time', label: 'Tiempo & Horas' },
-                { id: 'dev', label: 'Desarrolladores' },
+                { id: 'academic' as const, label: t('common.categories.academic') },
+                { id: 'finance' as const, label: t('common.categories.finance') },
+                { id: 'time' as const, label: t('common.categories.time') },
+                { id: 'dev' as const, label: t('common.categories.dev') },
               ].map((cat) => {
                 const toolsInCat = toolRegistry.filter((t) => t.category === cat.id);
                 if (toolsInCat.length === 0) return null;
@@ -256,6 +257,7 @@ export const Navbar: React.FC = () => {
                     <div className="space-y-0.5 mt-0.5">
                       {toolsInCat.map((tool) => {
                         const name = language === 'en' ? tool.defaultNameEn : tool.defaultNameEs;
+                        const badge = language === 'en' ? (tool.badgeEn || tool.badge) : tool.badge;
                         if (tool.isAvailable) {
                           return (
                             <Link
@@ -265,9 +267,9 @@ export const Navbar: React.FC = () => {
                               className="flex items-center justify-between px-2.5 py-1.5 text-xs text-zinc-200 hover:bg-zinc-900 rounded-lg"
                             >
                               <span>{name}</span>
-                              {tool.badge && (
+                              {badge && (
                                 <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-emerald-950 text-emerald-300 font-mono">
-                                  {tool.badge}
+                                  {badge}
                                 </span>
                               )}
                             </Link>
@@ -279,9 +281,9 @@ export const Navbar: React.FC = () => {
                             className="flex items-center justify-between px-2.5 py-1.5 text-xs text-zinc-500 opacity-70"
                           >
                             <span>{name}</span>
-                            {tool.badge && (
+                            {badge && (
                               <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-zinc-900 text-zinc-500 font-mono border border-zinc-800">
-                                {tool.badge}
+                                {badge}
                               </span>
                             )}
                           </div>

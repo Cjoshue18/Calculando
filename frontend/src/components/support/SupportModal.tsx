@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { X, Heart, ExternalLink, Coffee } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface SupportModalProps {
   isOpen: boolean;
@@ -7,6 +8,7 @@ interface SupportModalProps {
 }
 
 export const SupportModal: React.FC<SupportModalProps> = ({ isOpen, onClose }) => {
+  const { language, t } = useLanguage();
   const [tab, setTab] = useState<'bmc' | 'peru'>('bmc');
 
   React.useEffect(() => {
@@ -36,11 +38,11 @@ export const SupportModal: React.FC<SupportModalProps> = ({ isOpen, onClose }) =
             <div className="p-1.5 rounded-lg bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400">
               <Coffee className="w-4 h-4" />
             </div>
-            <span>Apoyar el proyecto Calculando</span>
+            <span>{t('supportModal.title')}</span>
           </div>
           <button 
             onClick={onClose}
-            className="p-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-md transition-colors"
+            className="p-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-md transition-colors cursor-pointer"
             aria-label="Cerrar modal"
           >
             <X className="w-5 h-5" />
@@ -51,23 +53,23 @@ export const SupportModal: React.FC<SupportModalProps> = ({ isOpen, onClose }) =
         <div className="flex border-b border-slate-200 dark:border-zinc-800 bg-slate-50 dark:bg-zinc-950 text-xs font-semibold tracking-wider">
           <button
             onClick={() => setTab('bmc')}
-            className={`flex-1 py-3 px-4 text-center border-b-2 transition-colors flex items-center justify-center gap-1.5 ${
+            className={`flex-1 py-3 px-4 text-center border-b-2 transition-colors flex items-center justify-center gap-1.5 cursor-pointer ${
               tab === 'bmc'
                 ? 'border-[#234968] text-[#234968] dark:border-[#5d95b3] dark:text-[#5d95b3] bg-white dark:bg-zinc-900 font-bold'
                 : 'border-transparent text-slate-500 hover:text-slate-700 dark:text-zinc-400'
             }`}
           >
-            <span>☕ Buy Me a Coffee</span>
+            <span>{t('supportModal.bmcTab')}</span>
           </button>
           <button
             onClick={() => setTab('peru')}
-            className={`flex-1 py-3 px-4 text-center border-b-2 transition-colors flex items-center justify-center gap-1.5 ${
+            className={`flex-1 py-3 px-4 text-center border-b-2 transition-colors flex items-center justify-center gap-1.5 cursor-pointer ${
               tab === 'peru'
                 ? 'border-[#234968] text-[#234968] dark:border-[#5d95b3] dark:text-[#5d95b3] bg-white dark:bg-zinc-900 font-bold'
                 : 'border-transparent text-slate-500 hover:text-slate-700 dark:text-zinc-400'
             }`}
           >
-            <span>🇵🇪 Yape / Plin</span>
+            <span>{t('supportModal.peruTab')}</span>
           </button>
         </div>
 
@@ -76,8 +78,7 @@ export const SupportModal: React.FC<SupportModalProps> = ({ isOpen, onClose }) =
           {tab === 'bmc' ? (
             <div className="space-y-4">
               <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-400 leading-relaxed max-w-sm mx-auto">
-                Calculando es una suite de herramientas de cálculo rápido y privado.
-                Cualquier contribución será sinceramente agradecida para apoyar su desarrollo continuo.
+                {t('supportModal.bmcDesc')}
               </p>
 
               {/* Real Buy Me a Coffee QR Code */}
@@ -88,14 +89,14 @@ export const SupportModal: React.FC<SupportModalProps> = ({ isOpen, onClose }) =
                   className="w-48 h-48 object-contain rounded-lg"
                 />
                 <span className="text-[11px] font-semibold text-slate-600 mt-2.5">
-                  Escanea con la cámara de tu celular
+                  {language === 'en' ? 'Scan with your phone camera' : 'Escanea con la cámara de tu celular'}
                 </span>
               </div>
 
               {/* Alternative Direct Button without broken icon */}
               <div className="pt-1 flex flex-col items-center gap-2">
                 <span className="text-xs text-slate-500 dark:text-zinc-400 font-medium">
-                  ¿Prefieres acceder directamente sin escanear?
+                  {language === 'en' ? 'Prefer direct access without scanning?' : '¿Prefieres acceder directamente sin escanear?'}
                 </span>
 
                 <a
@@ -113,7 +114,7 @@ export const SupportModal: React.FC<SupportModalProps> = ({ isOpen, onClose }) =
           ) : (
             <div className="space-y-4">
               <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-400 leading-relaxed max-w-sm mx-auto">
-                Contribuye de forma rápida y directa mediante Yape o Plin. Cualquier aporte voluntario es bienvenido.
+                {t('supportModal.peruDesc')}
               </p>
 
               {/* Real Yape / Plin QR Code */}
@@ -124,12 +125,12 @@ export const SupportModal: React.FC<SupportModalProps> = ({ isOpen, onClose }) =
                   className="w-48 h-48 object-contain rounded-lg"
                 />
                 <span className="text-[11px] font-semibold text-slate-600 mt-2.5">
-                  Escanea con Yape o Plin
+                  {language === 'en' ? 'Scan with Yape or Plin' : 'Escanea con Yape o Plin'}
                 </span>
               </div>
 
               <p className="text-xs text-slate-500 dark:text-zinc-400">
-                Cualquier contribución voluntaria es bienvenida y muy apreciada.
+                {language === 'en' ? 'Any voluntary contribution is deeply appreciated.' : 'Cualquier contribución voluntaria es muy apreciada.'}
               </p>
             </div>
           )}
@@ -139,7 +140,7 @@ export const SupportModal: React.FC<SupportModalProps> = ({ isOpen, onClose }) =
         <div className="px-6 py-3.5 bg-slate-50 dark:bg-zinc-950/80 border-t border-slate-200 dark:border-zinc-800 text-center">
           <p className="text-[11px] text-slate-500 dark:text-zinc-400 flex items-center justify-center gap-1.5">
             <Heart className="w-3 h-3 text-rose-500 fill-rose-500" />
-            <span>¡Muchas gracias por apoyar el desarrollo de Calculando!</span>
+            <span>{t('supportModal.thankYou')}</span>
           </p>
         </div>
       </div>

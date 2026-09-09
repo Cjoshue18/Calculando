@@ -18,38 +18,38 @@ export const Footer: React.FC = () => {
               <span className="text-base">Calculando</span>
             </div>
             <p className="text-xs text-slate-500 dark:text-zinc-400 max-w-sm leading-relaxed">
-              Herramientas de cálculo rápido y esencial para el día a día. Desarrollado con precisión matemática, cero rodeos y máxima velocidad de ejecución en tu navegador.
+              {t('footer.manifesto')}
             </p>
             <div className="flex items-center gap-2 pt-1 text-xs text-slate-400 dark:text-zinc-500">
               <ShieldCheck className="w-4 h-4 text-emerald-500" />
-              <span>Cálculos en memoria 100% privados (tus notas y datos no salen de tu dispositivo).</span>
+              <span>{t('footer.privacy')}</span>
             </div>
           </div>
 
           {/* Quick Tools */}
           <div>
             <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-zinc-500 mb-3">
-              Herramientas
+              {t('footer.tools')}
             </h4>
             <ul className="space-y-2 text-xs text-slate-600 dark:text-zinc-400">
               <li>
                 <Link to="/calculadora-nota-final" className="hover:text-[#234968] dark:hover:text-[#5d95b3] transition-colors">
-                  Calculadora de Nota Final
+                  {t('finalGrade.title')}
                 </Link>
               </li>
               <li>
                 <Link to="/promedio-ponderado-acumulado" className="hover:text-[#234968] dark:hover:text-[#5d95b3] transition-colors">
-                  Promedio Ponderado
+                  {t('common.categories.academic')}: GPA
                 </Link>
               </li>
               <li>
                 <Link to="/sumador-horas-minutos" className="hover:text-[#234968] dark:hover:text-[#5d95b3] transition-colors">
-                  Sumador de Horas
+                  {t('common.categories.time')}
                 </Link>
               </li>
               <li>
                 <Link to="/calculadora-tea-tcea" className="hover:text-[#234968] dark:hover:text-[#5d95b3] transition-colors">
-                  Simulador TEA / Préstamos
+                  {t('common.categories.finance')}
                 </Link>
               </li>
             </ul>
@@ -58,7 +58,7 @@ export const Footer: React.FC = () => {
           {/* Legal Links */}
           <div>
             <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-zinc-500 mb-3">
-              Legal
+              {t('footer.legal')}
             </h4>
             <ul className="space-y-2 text-xs text-slate-600 dark:text-zinc-400">
               <li>

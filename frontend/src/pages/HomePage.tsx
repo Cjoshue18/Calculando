@@ -44,19 +44,18 @@ export const HomePage: React.FC = () => {
           {/* Eyebrow Pill */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#234968] dark:bg-[#5d95b3] text-white dark:text-zinc-950 text-xs font-semibold tracking-tight shadow-xs mb-5 animate-in fade-in slide-in-from-top-2 duration-300">
             <span className="w-1.5 h-1.5 rounded-full bg-[#5d95b3] dark:bg-zinc-950 animate-pulse" />
-            <span>Hub de herramientas para el día a día</span>
+            <span>{t('home.eyebrow')}</span>
           </div>
 
           {/* Two-Line Headline */}
           <h1 className="text-4xl sm:text-6xl font-extrabold text-slate-900 dark:text-white tracking-[-0.045em] leading-[1.08] text-balance">
-            Cálculos matemáticos rápidos<br className="hidden sm:inline" />
-            <span className="text-[#5d95b3]"> y sin rodeos técnicos.</span>
+            {t('home.headline1')}<br className="hidden sm:inline" />
+            <span className="text-[#5d95b3]"> {t('home.headline2')}</span>
           </h1>
 
           {/* Subcopy */}
           <p className="mt-4 text-base sm:text-lg text-slate-600 dark:text-zinc-400 tracking-[-0.02em] max-w-2xl mx-auto leading-relaxed text-balance">
-            De notas académicas a conversiones de tiempo y cálculos financieros.
-            Máxima velocidad y privacidad absoluta directamente en tu navegador.
+            {t('home.subcopy')}
           </p>
 
           {/* Hero CTAs */}
@@ -65,14 +64,14 @@ export const HomePage: React.FC = () => {
               to="/calculadora-nota-final"
               className="px-6 py-3 bg-[#234968] hover:bg-[#1a374e] text-white rounded-full text-sm font-bold tracking-tight shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 inline-flex items-center gap-2"
             >
-              <span>Calcular nota final</span>
+              <span>{t('home.ctaCalculate')}</span>
               <ArrowRight className="w-4 h-4 text-[#5d95b3]" />
             </Link>
             <a
               href="#catalogo"
               className="px-5 py-3 bg-white dark:bg-zinc-900 hover:bg-slate-50 dark:hover:bg-zinc-800 text-slate-800 dark:text-zinc-200 border border-slate-200 dark:border-zinc-800 rounded-full text-sm font-medium tracking-tight transition-colors"
             >
-              Ver catálogo de herramientas
+              {t('home.ctaCatalog')}
             </a>
           </div>
         </div>
@@ -104,10 +103,10 @@ export const HomePage: React.FC = () => {
           {/* Controls in front of the animated band */}
           <div className="relative z-10 max-w-3xl w-full mx-auto px-4 sm:px-6 text-center text-white">
             <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-              Catálogo Oficial de Herramientas
+              {t('home.catalogTitle')}
             </h2>
             <p className="mt-1.5 text-xs sm:text-sm text-slate-200">
-              Selecciona la herramienta que necesitas. Todas se ejecutan en milisegundos en tu navegador.
+              {t('home.catalogSub')}
             </p>
 
             {/* Search Bar on Band */}
@@ -152,6 +151,7 @@ export const HomePage: React.FC = () => {
               const Icon = tool.icon;
               const name = language === 'en' ? tool.defaultNameEn : tool.defaultNameEs;
               const description = language === 'en' ? tool.defaultDescriptionEn : tool.defaultDescriptionEs;
+              const badge = language === 'en' ? (tool.badgeEn || tool.badge) : tool.badge;
 
               if (tool.isAvailable) {
                 return (
@@ -165,9 +165,9 @@ export const HomePage: React.FC = () => {
                         <div className="p-2.5 rounded-lg bg-slate-100 dark:bg-zinc-800 text-[#234968] dark:text-[#5d95b3] group-hover:bg-[#234968] group-hover:text-white dark:group-hover:bg-[#5d95b3] dark:group-hover:text-zinc-950 transition-colors">
                           <Icon className="w-5 h-5" />
                         </div>
-                        {tool.badge && (
+                        {badge && (
                           <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 dark:bg-emerald-950/80 dark:text-emerald-400 font-semibold">
-                            {tool.badge}
+                            {badge}
                           </span>
                         )}
                       </div>
@@ -180,7 +180,7 @@ export const HomePage: React.FC = () => {
                     </div>
 
                     <div className="mt-4 pt-3 border-t border-slate-100 dark:border-zinc-800/80 flex items-center justify-between text-xs font-semibold text-[#234968] dark:text-[#5d95b3]">
-                      <span>Abrir calculadora</span>
+                      <span>{t('common.openCalculator')}</span>
                       <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" />
                     </div>
                   </Link>
@@ -197,9 +197,9 @@ export const HomePage: React.FC = () => {
                       <div className="p-2 rounded-lg bg-slate-100 dark:bg-zinc-800 text-slate-500 dark:text-zinc-400">
                         <Icon className="w-5 h-5" />
                       </div>
-                      {tool.badge && (
+                      {badge && (
                         <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 dark:bg-zinc-800 dark:text-zinc-400 font-medium">
-                          {tool.badge}
+                          {badge}
                         </span>
                       )}
                     </div>
@@ -211,7 +211,7 @@ export const HomePage: React.FC = () => {
                     </p>
                   </div>
                   <div className="mt-4 pt-3 border-t border-slate-100 dark:border-zinc-800/80 text-[11px] font-mono text-slate-400 dark:text-zinc-500">
-                    En desarrollo activo
+                    {t('common.inDevelopment')}
                   </div>
                 </div>
               );
@@ -227,29 +227,29 @@ export const HomePage: React.FC = () => {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="p-5 rounded-xl bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 shadow-xs flex items-start gap-4">
-              <div className="w-10 h-10 rounded-xl bg-[#f0f6f9] dark:bg-[#13222d] text-[#234968] dark:text-[#5d95b3] border border-[#b7d2e0] dark:border-[#254157] flex items-center justify-center shrink-0 mt-0.5">
+              <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-zinc-800 text-[#234968] dark:text-[#5d95b3] flex items-center justify-center shrink-0 mt-0.5">
                 <Zap className="w-5 h-5" />
               </div>
               <div>
                 <h4 className="text-sm font-bold text-slate-900 dark:text-white">
-                  Cero Latencia (100% Client-Side)
+                  {t('home.feature1Title')}
                 </h4>
                 <p className="mt-1 text-xs text-slate-500 dark:text-zinc-400 leading-relaxed">
-                  Las fórmulas se computan en memoria en tu navegador con JavaScript puro. Sin pantallas de espera ni llamadas a servidores externos.
+                  {t('home.feature1Desc')}
                 </p>
               </div>
             </div>
 
             <div className="p-5 rounded-xl bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 shadow-xs flex items-start gap-4">
-              <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/60 flex items-center justify-center shrink-0 mt-0.5">
+              <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
                 <ShieldCheck className="w-5 h-5" />
               </div>
               <div>
                 <h4 className="text-sm font-bold text-slate-900 dark:text-white">
-                  Privacidad Absoluta
+                  {t('home.feature2Title')}
                 </h4>
                 <p className="mt-1 text-xs text-slate-500 dark:text-zinc-400 leading-relaxed">
-                  Tus notas, calificaciones o cálculos numéricos nunca viajan a bases de datos ni servicios de analítica. Todo reside en tu memoria RAM.
+                  {t('home.feature2Desc')}
                 </p>
               </div>
             </div>
