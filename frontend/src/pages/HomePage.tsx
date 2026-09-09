@@ -42,8 +42,8 @@ export const HomePage: React.FC = () => {
       <section className="relative pt-10 sm:pt-16 pb-12 sm:pb-16 overflow-hidden">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
           {/* Eyebrow Pill */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#f0f6f9] dark:bg-[#13222d] border border-[#b7d2e0] dark:border-[#254157] text-[#234968] dark:text-[#5d95b3] text-xs font-semibold tracking-tight mb-5 animate-in fade-in slide-in-from-top-2 duration-300">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#5d95b3] animate-pulse" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#234968] dark:bg-[#5d95b3] text-white dark:text-zinc-950 text-xs font-semibold tracking-tight shadow-xs mb-5 animate-in fade-in slide-in-from-top-2 duration-300">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#5d95b3] dark:bg-zinc-950 animate-pulse" />
             <span>Hub de herramientas para el día a día</span>
           </div>
 
@@ -162,7 +162,7 @@ export const HomePage: React.FC = () => {
                   >
                     <div>
                       <div className="flex items-center justify-between mb-3">
-                        <div className="p-2 rounded-lg bg-[#f0f6f9] dark:bg-[#13222d] text-[#234968] dark:text-[#5d95b3] border border-[#b7d2e0] dark:border-[#254157] group-hover:bg-[#234968] group-hover:text-white transition-colors">
+                        <div className="p-2.5 rounded-lg bg-slate-100 dark:bg-zinc-800 text-[#234968] dark:text-[#5d95b3] group-hover:bg-[#234968] group-hover:text-white dark:group-hover:bg-[#5d95b3] dark:group-hover:text-zinc-950 transition-colors">
                           <Icon className="w-5 h-5" />
                         </div>
                         {tool.badge && (
