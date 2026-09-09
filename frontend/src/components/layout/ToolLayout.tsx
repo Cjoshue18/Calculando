@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronRight, Home, Sparkles } from 'lucide-react';
+import { ChevronRight, Home } from 'lucide-react';
 import { GoogleFollowBanner } from '@/components/support/GoogleFollowBanner';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface ToolLayoutProps {
   category: string;
@@ -16,6 +17,8 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({
   children,
   historySlot,
 }) => {
+  const { t } = useLanguage();
+
   return (
     <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
       {/* Breadcrumbs for SEO */}
@@ -24,7 +27,7 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({
           <li>
             <Link to="/" className="flex items-center hover:text-slate-900 dark:hover:text-white transition-colors">
               <Home className="w-3.5 h-3.5 mr-1" />
-              <span>Inicio</span>
+              <span>{t('common.home')}</span>
             </Link>
           </li>
           <li>
@@ -50,17 +53,6 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({
 
           {/* Growth Hack Retention Banner */}
           <GoogleFollowBanner />
-
-          {/* Semantic Ad Slot (Ready for Google AdSense in compliance with AdSense guidelines) */}
-          <div 
-            id="adsense-slot-tool-bottom" 
-            className="w-full min-h-[90px] p-4 bg-slate-100/50 dark:bg-zinc-900/40 border border-dashed border-slate-200 dark:border-zinc-800 rounded-lg flex items-center justify-center text-xs text-slate-400 dark:text-zinc-600"
-          >
-            <div className="flex items-center gap-2">
-              <Sparkles className="w-3.5 h-3.5 opacity-50" />
-              <span className="font-mono uppercase tracking-widest text-[10px]">Espacio reservado para AdSense</span>
-            </div>
-          </div>
         </div>
 
         {/* History / Recent Calculations Drawer */}
