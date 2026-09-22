@@ -9,6 +9,8 @@ import { FinalGradePage } from '@/pages/FinalGradePage';
 import { GpaCalculatorPage } from '@/pages/GpaCalculatorPage';
 import { HoursCalculatorPage } from '@/pages/HoursCalculatorPage';
 import { PrivacyPage } from '@/pages/PrivacyPage';
+import { TermsPage } from '@/pages/TermsPage';
+import { AboutPage } from '@/pages/AboutPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 
 export const App: React.FC = () => {
@@ -24,7 +26,8 @@ export const App: React.FC = () => {
                 <Route path="/calculadora-nota-final" element={<FinalGradePage />} />
                 <Route path="/promedio-ponderado-acumulado" element={<GpaCalculatorPage />} />
                 <Route path="/sumador-horas-minutos" element={<HoursCalculatorPage />} />
-                <Route path="/terminos-condiciones" element={<PrivacyPage />} />
+                <Route path="/sobre-nosotros" element={<AboutPage />} />
+                <Route path="/terminos-condiciones" element={<TermsPage />} />
                 <Route path="/privacidad" element={<PrivacyPage />} />
                 <Route path="*" element={<NotFoundPage />} />
               </Routes>

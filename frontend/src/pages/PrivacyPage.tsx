@@ -54,19 +54,44 @@ export const PrivacyPage: React.FC = () => {
           </ul>
         </section>
 
-        <section className="space-y-3 text-sm text-slate-700 dark:text-zinc-300 leading-relaxed">
+        <section className="space-y-3 text-sm text-slate-700 dark:text-zinc-300 leading-relaxed p-4 rounded-lg bg-slate-50 dark:bg-zinc-800/50 border border-slate-200 dark:border-zinc-800">
           <h2 className="text-base font-semibold text-slate-900 dark:text-white">
-            {language === 'en' ? '3. Terms of Use & Disclaimer' : '3. Términos de Uso y Exención de Responsabilidad'}
+            {t('privacyPage.s3Title')}
           </h2>
           <p>
-            {language === 'en' 
-              ? 'Calculators provide technical estimations and references based on formal math formulas. Results should always be cross-checked with official syllabi, university regulations, or financial schedules.'
-              : 'Las calculadoras proveen estimaciones y referencias técnicas basadas en fórmulas matemáticas estándar. Los resultados deben contrastarse siempre con los sílabos oficiales, reglamentos universitarios y cronogramas bancarios correspondientes a cada caso.'}
+            {t('privacyPage.s3P1')}
+          </p>
+          <p>
+            {t('privacyPage.s3P2')}{' '}
+            <a 
+              href="https://adssettings.google.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-[#234968] dark:text-[#5d95b3] font-medium underline"
+            >
+              Google Ads Settings
+            </a>
+            {' '}o{' '}
+            <a 
+              href="https://www.aboutads.info/choices/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-[#234968] dark:text-[#5d95b3] font-medium underline"
+            >
+              aboutads.info
+            </a>.
           </p>
           <p className="text-xs text-slate-500 dark:text-zinc-400">
-            {language === 'en'
-              ? 'The service is provided as-is without warranties of any kind regarding suitability for non-standardized individual edge cases.'
-              : 'El servicio se suministra tal cual, sin garantías de ningún tipo sobre la adecuación a casos particulares no estandarizados.'}
+            {t('privacyPage.s3P3')}
+          </p>
+        </section>
+
+        <section className="space-y-3 text-sm text-slate-700 dark:text-zinc-300 leading-relaxed">
+          <h2 className="text-base font-semibold text-slate-900 dark:text-white">
+            {t('privacyPage.s4Title')}
+          </h2>
+          <p>
+            {t('privacyPage.s4P1')}
           </p>
         </section>
       </div>

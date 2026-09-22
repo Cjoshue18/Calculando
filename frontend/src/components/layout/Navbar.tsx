@@ -172,6 +172,17 @@ export const Navbar: React.FC = () => {
                   </div>
                 )}
               </div>
+
+              <Link
+                to="/sobre-nosotros"
+                className={`px-3 py-1.5 rounded-full transition-colors ${
+                  location.pathname === '/sobre-nosotros'
+                    ? 'text-white bg-zinc-800'
+                    : 'text-zinc-400 hover:text-white hover:bg-zinc-900'
+                }`}
+              >
+                {t('common.about')}
+              </Link>
             </nav>
           </div>
 
@@ -239,6 +250,13 @@ export const Navbar: React.FC = () => {
               className="block px-3 py-2 rounded-xl text-sm font-medium text-zinc-200 hover:bg-zinc-900"
             >
               {t('common.home')}
+            </Link>
+            <Link
+              to="/sobre-nosotros"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block px-3 py-2 rounded-xl text-sm font-medium text-zinc-200 hover:bg-zinc-900"
+            >
+              {t('common.about')}
             </Link>
             <div className="space-y-2 mt-2 max-h-[60vh] overflow-y-auto pr-1">
               {[

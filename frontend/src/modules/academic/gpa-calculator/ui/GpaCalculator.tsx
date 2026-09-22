@@ -205,8 +205,8 @@ export const GpaCalculator: React.FC = () => {
 
     const lines = [
       language === 'en'
-        ? '*Calculando — Credit-Weighted GPA Summary*'
-        : '*Calculando — Resumen de Promedio Ponderado por Créditos*',
+        ? '*Calculando - Credit-Weighted GPA Summary*'
+        : '*Calculando - Resumen de Promedio Ponderado por Créditos*',
       semesterName
         ? `${language === 'en' ? 'Period' : 'Periodo'}: ${semesterName}`
         : '',

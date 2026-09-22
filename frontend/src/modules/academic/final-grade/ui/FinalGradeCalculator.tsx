@@ -169,7 +169,7 @@ export const FinalGradeCalculator: React.FC = () => {
   const handleCopyWhatsappSummary = async () => {
     const cleanUrl = `${window.location.origin}${window.location.pathname}`;
     const text = [
-      language === 'en' ? '*Calculando — Required Final Exam Score*' : '*Calculando — Nota Requerida en Examen Final*',
+      language === 'en' ? '*Calculando - Required Final Exam Score*' : '*Calculando - Nota Requerida en Examen Final*',
       `${language === 'en' ? 'Course' : 'Curso'}: ${courseName}`,
       `${language === 'en' ? 'Scale' : 'Escala máxima'}: ${maxScale}`,
       `${language === 'en' ? 'Points accumulated' : 'Puntos acumulados'}: ${result.accumulatedPoints} pts`,

@@ -39,31 +39,36 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <Link to="/promedio-ponderado-acumulado" className="hover:text-[#234968] dark:hover:text-[#5d95b3] transition-colors">
-                  {t('common.categories.academic')}: GPA
+                  {t('gpa.title')}
                 </Link>
               </li>
               <li>
                 <Link to="/sumador-horas-minutos" className="hover:text-[#234968] dark:hover:text-[#5d95b3] transition-colors">
-                  {t('common.categories.time')}
-                </Link>
-              </li>
-              <li>
-                <Link to="/calculadora-tea-tcea" className="hover:text-[#234968] dark:hover:text-[#5d95b3] transition-colors">
-                  {t('common.categories.finance')}
+                  {t('hours.title')}
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Legal Links */}
+          {/* Project & Legal Links */}
           <div>
             <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-zinc-500 mb-3">
               {t('footer.legal')}
             </h4>
             <ul className="space-y-2 text-xs text-slate-600 dark:text-zinc-400">
               <li>
+                <Link to="/sobre-nosotros" className="hover:text-[#234968] dark:hover:text-[#5d95b3] transition-colors">
+                  {t('footer.about')}
+                </Link>
+              </li>
+              <li>
+                <Link to="/privacidad" className="hover:text-[#234968] dark:hover:text-[#5d95b3] transition-colors">
+                  {t('footer.privacyPolicy')}
+                </Link>
+              </li>
+              <li>
                 <Link to="/terminos-condiciones" className="hover:text-[#234968] dark:hover:text-[#5d95b3] transition-colors">
-                  {t('common.termsAndConditions')}
+                  {t('footer.termsOfService')}
                 </Link>
               </li>
             </ul>

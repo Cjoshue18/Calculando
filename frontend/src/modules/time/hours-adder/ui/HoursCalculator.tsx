@@ -290,7 +290,7 @@ export const HoursCalculator: React.FC = () => {
 
     if (activeMode === 'durations') {
       summaryText = [
-        language === 'en' ? '*Calculando — Time Durations Sum*' : '*Calculando — Suma de Duraciones de Tiempo*',
+        language === 'en' ? '*Calculando - Time Durations Sum*' : '*Calculando - Suma de Duraciones de Tiempo*',
         `${language === 'en' ? 'Total Result' : 'Resultado Total'}: *${calculationResult.formattedTime}*`,
         `${language === 'en' ? 'Decimal Hours' : 'Horas Decimales'}: *${calculationResult.decimalHoursFormatted}*`,
         `${language === 'en' ? 'Total Seconds' : 'Total Segundos'}: ${calculationResult.totalSignedSeconds} s`,
@@ -299,7 +299,7 @@ export const HoursCalculator: React.FC = () => {
     } else if (activeMode === 'clock') {
       const clockRes = calculationResult as ClockCalculationResult;
       summaryText = [
-        language === 'en' ? '*Calculando — Clock Finish Time*' : '*Calculando — Hora de Reloj*',
+        language === 'en' ? '*Calculando - Clock Finish Time*' : '*Calculando - Hora de Reloj*',
         `${language === 'en' ? 'Start Time' : 'Hora de Inicio'}: ${clockRes.startTime}`,
         `${language === 'en' ? 'Operation' : 'Operación'}: ${clockRes.isAdd ? '+' : '-'}${clockDurationHours}h ${clockDurationMinutes}m`,
         `*${language === 'en' ? 'Target Time' : 'Hora Final'}: ${clockRes.targetClock}* (${clockRes.dayShiftDescription})`,
@@ -309,7 +309,7 @@ export const HoursCalculator: React.FC = () => {
     } else {
       const tsRes = calculationResult as TimesheetResult;
       summaryText = [
-        language === 'en' ? '*Calculando — Work Timesheet Log*' : '*Calculando — Cómputo de Jornada Laboral*',
+        language === 'en' ? '*Calculando - Work Timesheet Log*' : '*Calculando - Cómputo de Jornada Laboral*',
         `${language === 'en' ? 'Entry Time' : 'Hora de Entrada'}: ${tsRes.entryTime}`,
         `${language === 'en' ? 'Exit Time' : 'Hora de Salida'}: ${tsRes.exitTime}`,
         `${language === 'en' ? 'Break / Lunch' : 'Refrigerio/Pausa'}: ${tsRes.breakMinutes} min`,

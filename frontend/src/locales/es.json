@@ -32,6 +32,7 @@
     "followBtn": "Seguir en Google",
     "madeWith": "Herramientas de cálculo rápido y privado",
     "mitLicense": "Todos los derechos reservados",
+    "about": "Sobre nosotros",
     "privacy": "Privacidad",
     "terms": "Términos",
     "termsAndConditions": "Términos y Condiciones"
@@ -54,7 +55,10 @@
     "manifesto": "Herramientas de cálculo rápido y esencial para el día a día. Desarrollado con precisión matemática, cero rodeos y máxima velocidad de ejecución en tu navegador.",
     "privacy": "Cálculos en memoria 100% privados (tus notas y datos no salen de tu dispositivo).",
     "tools": "Herramientas",
-    "legal": "Legal y Privacidad"
+    "legal": "Legal y Privacidad",
+    "about": "Sobre nosotros",
+    "privacyPolicy": "Política de Privacidad",
+    "termsOfService": "Términos y Condiciones"
   },
   "supportModal": {
     "title": "Apoyar el proyecto Calculando",
@@ -222,10 +226,10 @@
     "historyTitle": "Historial de cálculos de tiempo"
   },
   "privacyPage": {
-    "title": "Términos y Condiciones",
-    "subtitle": "Calculando · Herramientas de cálculo rápido y privado",
+    "title": "Política de Privacidad",
+    "subtitle": "Compromiso de privacidad, procesamiento local y cookies publicitarias.",
     "back": "Volver a las herramientas",
-    "s1Title": "1. Procesamiento 100% Local y Privacidad",
+    "s1Title": "1. Procesamiento 100% en el Navegador",
     "s1P1": "Calculando opera bajo un modelo de procesamiento 100% en el cliente. Todas las operaciones aritméticas, notas, promedios y datos introducidos en los formularios se procesan únicamente en la memoria local de tu navegador.",
     "s1P2": "Nada se guarda en servidores externos ni se transmite a terceros. Tus datos se mantienen en todo momento exclusivamente en tu dispositivo.",
     "s2Title": "2. Uso de Almacenamiento Local (Local Storage)",
@@ -233,9 +237,37 @@
     "s2Li1": "Recordar tu preferencia de tema (claro u oscuro).",
     "s2Li2": "Guardar el historial reciente de tus cálculos (almacenado solo en tu propio dispositivo para tu comodidad).",
     "s2P2": "Puedes borrar este historial en cualquier momento pulsando el botón 'Limpiar historial'.",
-    "s3Title": "3. Exactitud y Redondeo Matemático",
-    "s3P1": "Las fórmulas implementadas aplican el redondeo aritmético formal estándar. No obstante, las políticas de redondeo (hacia arriba, truncado, etc.) pueden variar según el reglamento específico de cada institución académica o entidad financiera.",
-    "s4Title": "4. Licencia y Uso Gratuito",
-    "s4P1": "Calculando es una suite de herramientas de libre acceso creada para estudiantes, profesionales y público general. No requiere registro ni suscripción."
+    "s3Title": "3. Publicidad de Terceros y Cookies (Google AdSense)",
+    "s3P1": "Calculando utiliza servicios publicitarios de terceros, incluyendo Google AdSense, para sustentar los costes de infraestructura del servicio gratuito. Google y sus empresas colaboradoras utilizan cookies (incluida la cookie DART de Google) para mostrar anuncios a los usuarios según sus visitas previas a este u otros sitios web.",
+    "s3P2": "Los usuarios pueden inhabilitar el uso de cookies para publicidad personalizada accediendo a la Configuración de Anuncios de Google (https://adssettings.google.com) o a través del sitio web www.aboutads.info.",
+    "s3P3": "Las cookies de publicidad operan independientemente de los motores de cálculo numérico de Calculando. En ningún momento los sistemas publicitarios tienen acceso a tus notas, cómputos de horas o variables introducidas en las herramientas.",
+    "s4Title": "4. Seguridad y Confidencialidad",
+    "s4P1": "Al no existir base de datos de usuarios ni cuentas de inicio de sesión, no existe riesgo de filtraciones de contraseñas ni recopilación de perfiles comerciales."
+  },
+  "termsPage": {
+    "title": "Términos y Condiciones de Uso",
+    "subtitle": "Condiciones de acceso, uso y exención de responsabilidad técnica.",
+    "back": "Volver a las herramientas",
+    "s1Title": "1. Aceptación y Gratuidad del Servicio",
+    "s1P1": "El acceso y uso de Calculando implica la aceptación plena de los presentes términos. La plataforma es de acceso libre y gratuito para fines académicos, personales y profesionales, sin requerir registro ni pago.",
+    "s2Title": "2. Exención de Responsabilidad Técnica y Fórmulas",
+    "s2P1": "Las calculadoras proveen estimaciones y referencias técnicas basadas en fórmulas matemáticas estándar y redondeo aritmético formal. Sin embargo, los resultados deben contrastarse siempre con los sílabos oficiales, reglamentos universitarios y cronogramas bancarios correspondientes a cada caso particular.",
+    "s2P2": "Calculando no se hace responsable de discrepancias derivadas de políticas internas de redondeo, ponderaciones atípicas o decisiones académicas y financieras tomadas a partir de los resultados de las herramientas.",
+    "s3Title": "3. Propiedad Intelectual y Restricciones",
+    "s3P1": "El diseño de interfaz, código fuente, denominación 'Calculando' y arquitectura de las herramientas están protegidos por derechos de propiedad intelectual. Queda prohibida la copia no autorizada, reventa comercial o despliegue de clones sin autorización expresa.",
+    "s4Title": "4. Disponibilidad y Modificaciones",
+    "s4P1": "Nos reservamos el derecho de actualizar, modificar o retirar herramientas en cualquier momento con el fin de optimizar el rendimiento, corregir errores o añadir nuevas funcionalidades."
+  },
+  "aboutPage": {
+    "title": "Sobre Calculando",
+    "subtitle": "Herramientas de cálculo útiles, transparentes y sin rodeos.",
+    "missionTitle": "Propósito del Proyecto",
+    "missionText": "Calculando es una suite web independiente enfocada en proveer cálculos matemáticos y académicos rápidos y sin rodeos. Nació con la finalidad de ofrecer una alternativa limpia frente a los sitios web convencionales que se encuentran saturados de anuncios invasivos y textos de relleno innecesarios.",
+    "privacyTitle": "Privacidad y Procesamiento en el Navegador",
+    "privacyText": "Todas las operaciones aritméticas se computan directamente en la memoria local de tu dispositivo. Tus notas, datos y cálculos nunca viajan a servidores externos ni se registran en bases de datos.",
+    "accuracyTitle": "Transparencia y Rigor Matemático",
+    "accuracyText": "Cada calculadora implementa fórmulas estandarizadas e incluye el desglose paso a paso de los procedimientos, permitiendo corroborar con exactitud el resultado obtenido.",
+    "freeUsageTitle": "Acceso Libre y Gratuito",
+    "freeUsageText": "La plataforma está disponible para estudiantes y profesionales de forma completamente abierta y gratuita, sin necesidad de registro ni suscripciones."
   }
 }

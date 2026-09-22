@@ -32,6 +32,7 @@
     "followBtn": "Follow on Google",
     "madeWith": "Fast and private calculation utilities",
     "mitLicense": "All rights reserved",
+    "about": "About Us",
     "privacy": "Privacy",
     "terms": "Terms",
     "termsAndConditions": "Terms & Conditions"
@@ -54,7 +55,10 @@
     "manifesto": "Essential, lightning-fast calculation tools for everyday tasks. Built with mathematical precision, zero fluff, and maximum browser execution speed.",
     "privacy": "100% private in-memory calculations (your grades and data never leave your device).",
     "tools": "Tools",
-    "legal": "Legal & Privacy"
+    "legal": "Legal & Privacy",
+    "about": "About Us",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms & Conditions"
   },
   "supportModal": {
     "title": "Support the Calculando project",
@@ -222,10 +226,10 @@
     "historyTitle": "Time calculation history"
   },
   "privacyPage": {
-    "title": "Terms and Conditions",
-    "subtitle": "Calculando · Fast and private calculation utilities",
+    "title": "Privacy Policy",
+    "subtitle": "Privacy commitment, local execution, and advertising cookies policy.",
     "back": "Back to tools",
-    "s1Title": "1. 100% Local Processing & Privacy",
+    "s1Title": "1. 100% In-Browser Local Processing",
     "s1P1": "Calculando operates under a 100% client-side processing architecture. All arithmetic calculations, grades, averages, and inputs are processed solely in your browser's local memory.",
     "s1P2": "Nothing is stored on external servers or transmitted to third parties. Your data remains exclusively on your device at all times.",
     "s2Title": "2. Use of Local Storage",
@@ -233,9 +237,37 @@
     "s2Li1": "Remember your theme preference (light or dark mode).",
     "s2Li2": "Store your recent calculation history (saved only on your own device for your convenience).",
     "s2P2": "You can wipe this history at any time by clicking the 'Clear history' button.",
-    "s3Title": "3. Mathematical Precision & Rounding",
-    "s3P1": "The formulas implement standard formal arithmetic rounding. However, specific rounding rules (ceiling, truncation, etc.) may vary depending on the official academic or financial policy of your institution.",
-    "s4Title": "4. License and Free Usage",
-    "s4P1": "Calculando is a free web suite created for students, professionals, and the general public. No registration or paid subscription required."
+    "s3Title": "3. Third-Party Advertising & Cookies (Google AdSense)",
+    "s3P1": "Calculando uses third-party advertising partners, including Google AdSense, to fund the server infrastructure of this free service. Google and its partners use cookies (such as the Google DART cookie) to serve ads to users based on their prior visits to this website or other websites across the Internet.",
+    "s3P2": "Users may opt out of personalized advertising by visiting Google Ads Settings (https://adssettings.google.com) or via www.aboutads.info.",
+    "s3P3": "Advertising cookies operate independently from Calculando's mathematical engines. At no point do advertising systems have access to your numeric grades, hours computations, or inputs.",
+    "s4Title": "4. Security & Data Protection",
+    "s4P1": "Because Calculando requires no accounts, passwords, or personal profiles, there is zero risk of credential leaks or unauthorized commercial data harvesting."
+  },
+  "termsPage": {
+    "title": "Terms & Conditions of Use",
+    "subtitle": "Terms of access, usage guidelines, and technical disclaimer.",
+    "back": "Back to tools",
+    "s1Title": "1. Acceptance and Free Access",
+    "s1P1": "Accessing and using Calculando constitutes full acceptance of these terms. The platform is freely accessible for academic, personal, and professional use without requiring account registration or payment.",
+    "s2Title": "2. Technical Disclaimer & Mathematical Estimations",
+    "s2P1": "Calculators provide mathematical estimations based on standard arithmetic formulas and standard rounding. However, results should always be cross-checked with official institutional regulations, course syllabi, and banking schedules for individual cases.",
+    "s2P2": "Calculando assumes no liability for discrepancies resulting from non-standard internal rounding policies, atypical evaluation criteria, or decisions made based on calculated outputs.",
+    "s3Title": "3. Intellectual Property and Restrictions",
+    "s3P1": "The interface design, codebase, brand name 'Calculando', and calculation architectures are protected by intellectual property laws. Unauthorized reproduction, commercial distribution, or deployment of scraping clones is strictly prohibited.",
+    "s4Title": "4. Service Availability & Modifications",
+    "s4P1": "We reserve the right to update, modify, or retire calculation tools at any time to enhance performance, correct bugs, or introduce new features."
+  },
+  "aboutPage": {
+    "title": "About Calculando",
+    "subtitle": "Useful, transparent, and direct calculation utilities.",
+    "missionTitle": "Project Mission",
+    "missionText": "Calculando is an independent web suite dedicated to providing fast and straightforward mathematical and academic calculations. It was created to offer a clean alternative to conventional websites cluttered with intrusive ads and unnecessary filler text.",
+    "privacyTitle": "Privacy and Local In-Browser Processing",
+    "privacyText": "All mathematical operations run exclusively in your browser's local memory. None of your grades, scores, time logs, or inputs are ever transmitted to external servers or recorded in databases.",
+    "accuracyTitle": "Transparency and Mathematical Rigor",
+    "accuracyText": "Every calculator utilizes standard mathematical formulas and provides step-by-step procedures, allowing users to transparently verify how each result is obtained.",
+    "freeUsageTitle": "Free and Open Access",
+    "freeUsageText": "The platform is openly accessible to students and professionals free of charge, with no sign-ups, accounts, or subscriptions required."
   }
 }
