@@ -6,6 +6,8 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { HomePage } from '@/pages/HomePage';
 import { FinalGradePage } from '@/pages/FinalGradePage';
+import { GpaCalculatorPage } from '@/pages/GpaCalculatorPage';
+import { HoursCalculatorPage } from '@/pages/HoursCalculatorPage';
 import { PrivacyPage } from '@/pages/PrivacyPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 
@@ -20,6 +22,8 @@ export const App: React.FC = () => {
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/calculadora-nota-final" element={<FinalGradePage />} />
+                <Route path="/promedio-ponderado-acumulado" element={<GpaCalculatorPage />} />
+                <Route path="/sumador-horas-minutos" element={<HoursCalculatorPage />} />
                 <Route path="/terminos-condiciones" element={<PrivacyPage />} />
                 <Route path="/privacidad" element={<PrivacyPage />} />
                 <Route path="*" element={<NotFoundPage />} />
