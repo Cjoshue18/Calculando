@@ -233,6 +233,14 @@
     "title": "Calculadora TEA / TCEA / Cuotas",
     "description": "Simula cuotas bancarias en soles/dólares, seguro de desgravamen y cronograma."
   },
+  "rentaQuinta": {
+    "title": "Calculadora de Renta de 5ta Categoría",
+    "description": "Calcula retención mensual en boleta, deducción de 7 UIT y tramos SUNAT de planilla."
+  },
+  "gpaConverter": {
+    "title": "Conversor Vigesimal a GPA y ECTS",
+    "description": "Equivalencia de notas de 0 a 20 a escala 4.0 de EE.UU. y grados europeos ECTS."
+  },
   "privacyPage": {
     "title": "Política de Privacidad",
     "subtitle": "Compromiso de privacidad, procesamiento local y cookies publicitarias.",

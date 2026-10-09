@@ -34,6 +34,8 @@ const routes = [
           <li><a href="/sumador-horas-minutos">Sumador y Restador de Horas</a> - Aritmética sexagesimal y conversión decimal.</li>
           <li><a href="/calculadora-igv-detracciones">Calculadora de IGV y Detracciones</a> - Base imponible, 18% IGV y tasas SPOT de SUNAT.</li>
           <li><a href="/calculadora-tea-tcea">Calculadora TEA / TCEA</a> - Simulación de cuotas bancarias en sistema francés.</li>
+          <li><a href="/calculadora-renta-quinta-categoria">Calculadora de Renta de 5ta Categoría</a> - Retención mensual en boleta y escala SUNAT.</li>
+          <li><a href="/conversor-notas-gpa-vigesimal">Conversor Vigesimal a GPA y ECTS</a> - Equivalencia de 0-20 a GPA 4.0 y grados europeos.</li>
         </ul>
       </main>
     `,
@@ -139,6 +141,60 @@ const routes = [
         </section>
       </article>
     `,
+  },
+  {
+    path: '/calculadora-renta-quinta-categoria',
+    title: 'Calculadora de Renta de 5ta Categoría 2026 (Planilla SUNAT) - Calculando',
+    description: 'Calcula la retención mensual del Impuesto a la Renta de 5ta categoría en boleta de pago (Perú). Deducción de 7 UIT, tramos progresivos del 8% al 30% y gratificaciones de ley.',
+    schemaType: 'MathSolver',
+    heading: 'Calculadora de Impuesto a la Renta de 5ta Categoría',
+    contentHtml: `
+      <article>
+        <h1>Calculadora de Impuesto a la Renta de 5ta Categoría (Perú)</h1>
+        <p>Cálculo oficial de retención en boleta para trabajadores en planilla con deducción inafecta de 7 UIT y escala progresiva de SUNAT.</p>
+        <section>
+          <h2>Deducción de 7 UIT y Tramos Progresivos</h2>
+          <p>Los primeros 7 UIT de ingresos brutos anuales están libres de impuestos (Art. 46 LIR). El exceso tributa por tramos acumulativos del 8%, 14%, 17%, 20% y 30% (Art. 53 LIR).</p>
+        </section>
+      </article>
+    `,
+    faqs: [
+      {
+        q: '¿A partir de qué sueldo mensual se retiene impuesto a la renta de 5ta categoría?',
+        a: 'Para el ejercicio tributario con UIT de S/ 5,150, la deducción inafecta obligatoria de 7 UIT equivale a S/ 36,050 al año. En un régimen común, se empieza a retener a partir de un sueldo mensual aproximado de S/ 2,542.',
+      },
+      {
+        q: '¿Cuáles son los tramos y tasas del impuesto a la renta de 5ta categoría?',
+        a: 'Tramo 1 (hasta 5 UIT): 8%; Tramo 2 (más de 5 hasta 20 UIT): 14%; Tramo 3 (más de 20 hasta 35 UIT): 17%; Tramo 4 (más de 35 hasta 45 UIT): 20%; y Tramo 5 (más de 45 UIT): 30%.',
+      },
+    ],
+  },
+  {
+    path: '/conversor-notas-gpa-vigesimal',
+    title: 'Conversor de Notas Vigesimal (0-20) a GPA (4.0) y ECTS Europeo - Calculando',
+    description: 'Convierte tu promedio de notas universitario peruano (escala 0 a 20) a GPA 4.0 (EE.UU.), sistema europeo ECTS y escala alemana DAAD según estándares oficiales WES y Fulbright.',
+    schemaType: 'MathSolver',
+    heading: 'Conversor de Notas Vigesimal a GPA y ECTS',
+    contentHtml: `
+      <article>
+        <h1>Conversor de Notas Vigesimal (0-20) a GPA (4.0) y ECTS Europeo</h1>
+        <p>Equivalencia estandarizada de promedios universitarios peruanos a escalas de calificación internacionales WES, Fulbright y Fórmula Bávara para Alemania.</p>
+        <section>
+          <h2>Metodología de Homologación Internacional</h2>
+          <p>Una simple regla de tres es matemáticamente incorrecta porque en Perú el rango aprobatorio es de 11 a 20, mientras que en EE.UU. es de 2.0 a 4.0. Se emplean tablas estándar WES.</p>
+        </section>
+      </article>
+    `,
+    faqs: [
+      {
+        q: '¿Por qué convertir una nota con regla de tres directa es un error?',
+        a: 'Una regla de tres directa (Nota / 5) asignaría a un 10/20 un GPA de 2.0 (aprobado en EE.UU.), cuando en Perú 10 es una calificación desaprobatoria (F / 0.00).',
+      },
+      {
+        q: '¿Qué es la Fórmula Bávara Modificada utilizada en Alemania?',
+        a: 'Es la fórmula oficial adoptada por universidades alemanas y el DAAD: N_Alemania = 1 + 3 × [(N_max - N) / (N_max - N_min)], donde 1.0 es la nota máxima de excelencia y 4.0 es la nota mínima para aprobar.',
+      },
+    ],
   },
   {
     path: '/sobre-nosotros',

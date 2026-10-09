@@ -32,3 +32,5 @@ export const NotFoundPage: React.FC = () => {
     </main>
   );
 };
+
+export default NotFoundPage;

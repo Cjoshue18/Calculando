@@ -233,6 +233,14 @@
     "title": "TEA / TCEA Loan Simulator",
     "description": "Simulate loan payments, insurance fees, and amortization schedules."
   },
+  "rentaQuinta": {
+    "title": "5th Category Payroll Tax Calculator",
+    "description": "Calculate monthly Peruvian payroll tax withholding, 7 UIT deductions, and Sunat tax tiers."
+  },
+  "gpaConverter": {
+    "title": "Vigesimal (0-20) to US GPA & ECTS Converter",
+    "description": "Convert Peruvian grades to US 4.0 GPA, letter grades, and European ECTS scales."
+  },
   "privacyPage": {
     "title": "Privacy Policy",
     "subtitle": "Privacy commitment, local execution, and advertising cookies policy.",

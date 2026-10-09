@@ -89,3 +89,5 @@ export const AboutPage: React.FC = () => {
     </main>
   );
 };
+
+export default AboutPage;

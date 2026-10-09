@@ -105,3 +105,5 @@ export const PrivacyPage: React.FC = () => {
   );
 };
 
+export default PrivacyPage;
+

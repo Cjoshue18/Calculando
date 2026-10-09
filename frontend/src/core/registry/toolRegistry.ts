@@ -4,7 +4,9 @@ import {
   Clock, 
   Landmark, 
   Receipt, 
-  Layers
+  Layers,
+  Briefcase,
+  Award
 } from 'lucide-react';
 
 export type ToolCategory = 'all' | 'academic' | 'finance' | 'time' | 'dev';
@@ -106,5 +108,37 @@ export const toolRegistry: ToolMetadata[] = [
     badge: 'Nuevo',
     badgeEn: 'New',
     keywords: ['igv', 'sunat', 'detraccion', 'factura', 'impuestos', 'peru'],
+  },
+  {
+    id: 'renta-quinta',
+    slug: '/calculadora-renta-quinta-categoria',
+    nameKey: 'rentaQuinta.title',
+    defaultNameEs: 'Calculadora de Renta de 5ta Categoría',
+    defaultNameEn: '5th Category Payroll Tax Calculator',
+    descriptionKey: 'rentaQuinta.description',
+    defaultDescriptionEs: 'Calcula retención mensual en boleta, deducción de 7 UIT y tramos SUNAT de planilla.',
+    defaultDescriptionEn: 'Calculate monthly Peruvian payroll tax withholding, 7 UIT deductions, and Sunat tax tiers.',
+    category: 'finance',
+    icon: Briefcase,
+    isAvailable: true,
+    badge: 'Nuevo',
+    badgeEn: 'New',
+    keywords: ['renta', 'quinta categoria', 'sunat', 'sueldo', 'planilla', 'uit', 'impuestos', 'boleta'],
+  },
+  {
+    id: 'gpa-converter',
+    slug: '/conversor-notas-gpa-vigesimal',
+    nameKey: 'gpaConverter.title',
+    defaultNameEs: 'Conversor Vigesimal a GPA y ECTS',
+    defaultNameEn: 'Vigesimal (0-20) to US GPA & ECTS Converter',
+    descriptionKey: 'gpaConverter.description',
+    defaultDescriptionEs: 'Equivalencia de notas de 0 a 20 a escala 4.0 de EE.UU. y grados europeos ECTS.',
+    defaultDescriptionEn: 'Convert Peruvian grades to US 4.0 GPA, letter grades, and European ECTS scales.',
+    category: 'academic',
+    icon: Award,
+    isAvailable: true,
+    badge: 'Nuevo',
+    badgeEn: 'New',
+    keywords: ['gpa', 'vigesimal', 'conversor', 'ects', 'wes', 'daad', 'fulbright', 'beca 18', 'notas'],
   },
 ];
