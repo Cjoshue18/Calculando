@@ -62,16 +62,8 @@
   },
   "supportModal": {
     "title": "Apoyar el proyecto Calculando",
-    "bmcTab": "☕ Buy Me a Coffee",
-    "peruTab": "🇵🇪 Yape / Plin",
-    "bmcDesc": "Si alguna de las calculadoras te ahorró tiempo, un café nos ayuda a mantener los servidores y seguir programando herramientas libres de anuncios invasivos.",
-    "openBmc": "Abrir perfil en Buy Me a Coffee",
-    "peruTitle": "Apoyo directo (Perú)",
-    "peruDesc": "Para apoyo directo sin comisiones desde cualquier billetera digital en Perú.",
-    "beneficiary": "Titular",
-    "number": "Número",
-    "copiedYape": "¡Número copiado!",
-    "thankYou": "¡Muchísimas gracias por apoyar el desarrollo independiente!",
+    "bmcDesc": "Calculando es una suite de herramientas de cálculo rápido y privado. Si alguna de las calculadoras te ahorró tiempo, tu apoyo voluntario nos ayuda a mantener los servidores y seguir programando herramientas sin rodeos.",
+    "thankYou": "¡Muchas gracias por apoyar el desarrollo de Calculando!",
     "close": "Cerrar"
   },
   "finalGrade": {

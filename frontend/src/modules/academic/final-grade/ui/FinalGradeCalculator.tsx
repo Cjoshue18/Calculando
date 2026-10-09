@@ -666,7 +666,7 @@ export const FinalGradeCalculator: React.FC = () => {
           </div>
         </div>
 
-        {/* Growth Card B: Support with Coffee / Yape */}
+        {/* Growth Card B: Support with Coffee */}
         <div className="p-5 bg-slate-50 dark:bg-zinc-950/80 border border-slate-200 dark:border-zinc-800 rounded-xl shadow-cal-card flex flex-col justify-between">
           <div>
             <div className="flex items-center gap-2 text-xs font-bold text-[#234968] dark:text-[#5d95b3] mb-1">

@@ -62,16 +62,8 @@
   },
   "supportModal": {
     "title": "Support the Calculando project",
-    "bmcTab": "☕ Buy Me a Coffee",
-    "peruTab": "🇵🇪 Yape / Plin",
-    "bmcDesc": "If any of the calculators saved you time, a coffee helps keep the servers running and continue building tools free of invasive ads.",
-    "openBmc": "Open Buy Me a Coffee profile",
-    "peruTitle": "Direct Support (Peru)",
-    "peruDesc": "For direct commission-free support from any digital wallet in Peru.",
-    "beneficiary": "Account Holder",
-    "number": "Phone Number",
-    "copiedYape": "Phone number copied!",
-    "thankYou": "Thank you so much for supporting independent development!",
+    "bmcDesc": "Calculando is a fast, 100% private math utility suite. If any calculator saved you time, your voluntary support helps keep servers running and build new tools.",
+    "thankYou": "Thank you so much for supporting Calculando!",
     "close": "Close"
   },
   "finalGrade": {

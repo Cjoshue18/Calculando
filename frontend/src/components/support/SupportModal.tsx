@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { X, Heart, ExternalLink, Coffee } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 
@@ -9,7 +9,6 @@ interface SupportModalProps {
 
 export const SupportModal: React.FC<SupportModalProps> = ({ isOpen, onClose }) => {
   const { language, t } = useLanguage();
-  const [tab, setTab] = useState<'bmc' | 'peru'>('bmc');
 
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -49,91 +48,41 @@ export const SupportModal: React.FC<SupportModalProps> = ({ isOpen, onClose }) =
           </button>
         </div>
 
-        {/* Tab Selection: Buy Me a Coffee first, then Yape / Plin */}
-        <div className="flex border-b border-slate-200 dark:border-zinc-800 bg-slate-50 dark:bg-zinc-950 text-xs font-semibold tracking-wider">
-          <button
-            onClick={() => setTab('bmc')}
-            className={`flex-1 py-3 px-4 text-center border-b-2 transition-colors flex items-center justify-center gap-1.5 cursor-pointer ${
-              tab === 'bmc'
-                ? 'border-[#234968] text-[#234968] dark:border-[#5d95b3] dark:text-[#5d95b3] bg-white dark:bg-zinc-900 font-bold'
-                : 'border-transparent text-slate-500 hover:text-slate-700 dark:text-zinc-400'
-            }`}
-          >
-            <span>{t('supportModal.bmcTab')}</span>
-          </button>
-          <button
-            onClick={() => setTab('peru')}
-            className={`flex-1 py-3 px-4 text-center border-b-2 transition-colors flex items-center justify-center gap-1.5 cursor-pointer ${
-              tab === 'peru'
-                ? 'border-[#234968] text-[#234968] dark:border-[#5d95b3] dark:text-[#5d95b3] bg-white dark:bg-zinc-900 font-bold'
-                : 'border-transparent text-slate-500 hover:text-slate-700 dark:text-zinc-400'
-            }`}
-          >
-            <span>{t('supportModal.peruTab')}</span>
-          </button>
-        </div>
-
         {/* Modal Body */}
         <div className="p-6 text-center space-y-4">
-          {tab === 'bmc' ? (
-            <div className="space-y-4">
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-400 leading-relaxed max-w-sm mx-auto">
-                {t('supportModal.bmcDesc')}
-              </p>
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-400 leading-relaxed max-w-sm mx-auto">
+            {t('supportModal.bmcDesc')}
+          </p>
 
-              {/* Real Buy Me a Coffee QR Code */}
-              <div className="mx-auto w-56 p-4 bg-white border border-slate-200 dark:border-zinc-700 rounded-2xl flex flex-col items-center justify-center shadow-sm">
-                <img 
-                  src="/qr-code.webp" 
-                  alt="Código QR Buy Me a Coffee" 
-                  className="w-48 h-48 object-contain rounded-lg"
-                />
-                <span className="text-[11px] font-semibold text-slate-600 mt-2.5">
-                  {language === 'en' ? 'Scan with your phone camera' : 'Escanea con la cámara de tu celular'}
-                </span>
-              </div>
+          {/* Buy Me a Coffee QR Code */}
+          <div className="mx-auto w-56 p-4 bg-white border border-slate-200 dark:border-zinc-700 rounded-2xl flex flex-col items-center justify-center shadow-xs">
+            <img 
+              src="/qr-code.webp" 
+              alt="Código QR Buy Me a Coffee" 
+              className="w-48 h-48 object-contain rounded-lg"
+            />
+            <span className="text-[11px] font-semibold text-slate-600 mt-2.5">
+              {language === 'en' ? 'Scan with your phone camera' : 'Escanea con la cámara de tu celular'}
+            </span>
+          </div>
 
-              {/* Alternative Direct Button without broken icon */}
-              <div className="pt-1 flex flex-col items-center gap-2">
-                <span className="text-xs text-slate-500 dark:text-zinc-400 font-medium">
-                  {language === 'en' ? 'Prefer direct access without scanning?' : '¿Prefieres acceder directamente sin escanear?'}
-                </span>
+          {/* Direct Button */}
+          <div className="pt-1 flex flex-col items-center gap-2">
+            <span className="text-xs text-slate-500 dark:text-zinc-400 font-medium">
+              {language === 'en' ? 'Prefer direct access without scanning?' : '¿Prefieres acceder directamente sin escanear?'}
+            </span>
 
-                <a
-                  href="https://buymeacoffee.com/calculando"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-[#FFDD00] hover:bg-[#ffe733] text-black font-bold text-sm tracking-tight border border-black/20 shadow-sm hover:shadow-md transition-all transform hover:-translate-y-0.5 active:translate-y-0"
-                  style={{ fontFamily: "'Lato', sans-serif" }}
-                >
-                  <span>Buy me a coffee</span>
-                  <ExternalLink className="w-3.5 h-3.5 opacity-70 ml-0.5" />
-                </a>
-              </div>
-            </div>
-          ) : (
-            <div className="space-y-4">
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-400 leading-relaxed max-w-sm mx-auto">
-                {t('supportModal.peruDesc')}
-              </p>
-
-              {/* Real Yape / Plin QR Code */}
-              <div className="mx-auto w-56 p-4 bg-white border border-slate-200 dark:border-zinc-700 rounded-2xl flex flex-col items-center justify-center shadow-sm">
-                <img 
-                  src="/qr-code-2.webp" 
-                  alt="Código QR Yape o Plin" 
-                  className="w-48 h-48 object-contain rounded-lg"
-                />
-                <span className="text-[11px] font-semibold text-slate-600 mt-2.5">
-                  {language === 'en' ? 'Scan with Yape or Plin' : 'Escanea con Yape o Plin'}
-                </span>
-              </div>
-
-              <p className="text-xs text-slate-500 dark:text-zinc-400">
-                {language === 'en' ? 'Any voluntary contribution is deeply appreciated.' : 'Cualquier contribución voluntaria es muy apreciada.'}
-              </p>
-            </div>
-          )}
+            <a
+              href="https://buymeacoffee.com/cjoshue18"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-[#FFDD00] hover:bg-[#ffe733] text-black font-bold text-sm tracking-tight border border-black/20 shadow-xs hover:shadow-md transition-all transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+              style={{ fontFamily: "'Lato', sans-serif" }}
+            >
+              <span>Buy me a coffee</span>
+              <ExternalLink className="w-3.5 h-3.5 opacity-70 ml-0.5" />
+            </a>
+          </div>
         </div>
 
         {/* Footer Note */}
@@ -147,3 +96,5 @@ export const SupportModal: React.FC<SupportModalProps> = ({ isOpen, onClose }) =
     </div>
   );
 };
+
+export default SupportModal;

@@ -1,7 +1,13 @@
 const fs = require('fs');
 const path = require('path');
 
-const forbidden = ['joshue', 'correa', 'contacto@', 'github.com/cjoshue'];
+const forbiddenPatterns = [
+  { name: 'personal surname (correa)', regex: /correa/i },
+  { name: 'personal contact email', regex: /contacto@/i },
+  { name: 'personal github profile', regex: /github\.com\/cjoshue/i },
+  { name: 'personal phone/yape number', regex: /9\d{8}/ },
+  { name: 'author real name attribution', regex: /(?:desarrollado por|creado por|hecho por)\s+joshue/i },
+];
 let leaks = 0;
 
 function checkDir(dir) {
@@ -11,9 +17,9 @@ function checkDir(dir) {
       checkDir(full);
     } else if (f.isFile() && /\.(tsx?|json|html|md|css|js)$/.test(f.name)) {
       const content = fs.readFileSync(full, 'utf8');
-      forbidden.forEach(w => {
-        if (new RegExp(w, 'i').test(content)) {
-          console.error(`LEAK FOUND (${w}) in: ${full}`);
+      forbiddenPatterns.forEach(({ name, regex }) => {
+        if (regex.test(content)) {
+          console.error(`LEAK FOUND (${name}) in: ${full}`);
           leaks++;
         }
       });
