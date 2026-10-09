@@ -1,13 +1,19 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { Shield, ArrowLeft } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
+import { SEOHead } from '@/components/seo/SEOHead';
 
 export const PrivacyPage: React.FC = () => {
   const { language, t } = useLanguage();
 
   return (
     <main className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+      <SEOHead
+        title={language === 'en' ? 'Privacy Policy - Calculando' : 'Política de Privacidad y Cookies - Calculando'}
+        description={language === 'en' ? 'Calculando Privacy Policy: complete client-side processing, no telemetry or personal data tracking, Google AdSense cookie disclosure.' : 'Política de privacidad de Calculando: procesamiento 100% local en tu navegador, sin recopilación de datos personales y divulgación de cookies de Google AdSense.'}
+        canonicalPath="/privacidad"
+        schemaType="WebPage"
+      />
       <Link to="/" className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#234968] dark:text-[#5d95b3] hover:underline mb-6">
         <ArrowLeft className="w-4 h-4" />
         <span>{t('common.backToTools')}</span>

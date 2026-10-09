@@ -1,13 +1,19 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, ShieldCheck, Zap, Calculator, CheckCircle2 } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
+import { SEOHead } from '@/components/seo/SEOHead';
 
 export const AboutPage: React.FC = () => {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
 
   return (
     <main className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+      <SEOHead
+        title={language === 'en' ? 'About Us - Calculando' : 'Sobre Nosotros - Calculando'}
+        description={language === 'en' ? 'Learn about Calculando: mission, commitment to absolute data privacy, client-side math rigor, and educational tools.' : 'Conoce Calculando: nuestra misión, compromiso con la privacidad absoluta sin recolección de datos, rigor matemático local y herramientas educativas.'}
+        canonicalPath="/sobre-nosotros"
+        schemaType="WebPage"
+      />
       {/* Back Link */}
       <Link 
         to="/" 

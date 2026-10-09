@@ -1,13 +1,19 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { FileText, ArrowLeft } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
+import { SEOHead } from '@/components/seo/SEOHead';
 
 export const TermsPage: React.FC = () => {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
 
   return (
     <main className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+      <SEOHead
+        title={language === 'en' ? 'Terms & Conditions - Calculando' : 'Términos y Condiciones de Uso - Calculando'}
+        description={language === 'en' ? 'Calculando terms and conditions: free mathematical and educational tool, academic disclaimer and privacy terms.' : 'Términos y condiciones de Calculando: herramientas matemáticas libres para uso educativo, descargo de responsabilidad y normas de uso.'}
+        canonicalPath="/terminos-condiciones"
+        schemaType="WebPage"
+      />
       <Link to="/" className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#234968] dark:text-[#5d95b3] hover:underline mb-6">
         <ArrowLeft className="w-4 h-4" />
         <span>{t('common.backToTools')}</span>

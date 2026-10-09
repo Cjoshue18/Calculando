@@ -47,6 +47,16 @@ export const Footer: React.FC = () => {
                   {t('hours.title')}
                 </Link>
               </li>
+              <li>
+                <Link to="/calculadora-igv-detracciones" className="hover:text-[#234968] dark:hover:text-[#5d95b3] transition-colors">
+                  {t('igv.title')}
+                </Link>
+              </li>
+              <li>
+                <Link to="/calculadora-tea-tcea" className="hover:text-[#234968] dark:hover:text-[#5d95b3] transition-colors">
+                  {t('tea.title')}
+                </Link>
+              </li>
             </ul>
           </div>
 

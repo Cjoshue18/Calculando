@@ -3,12 +3,17 @@ import { Link } from 'react-router-dom';
 import { ChevronRight, Home } from 'lucide-react';
 import { GoogleFollowBanner } from '@/components/support/GoogleFollowBanner';
 import { useLanguage } from '@/context/LanguageContext';
+import { SEOHead, FAQItem } from '@/components/seo/SEOHead';
 
 interface ToolLayoutProps {
   category: string;
   toolName: string;
   children: React.ReactNode;
   historySlot?: React.ReactNode;
+  seoTitle?: string;
+  seoDescription?: string;
+  canonicalPath?: string;
+  faqs?: FAQItem[];
 }
 
 export const ToolLayout: React.FC<ToolLayoutProps> = ({
@@ -16,11 +21,25 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({
   toolName,
   children,
   historySlot,
+  seoTitle,
+  seoDescription,
+  canonicalPath,
+  faqs,
 }) => {
   const { t } = useLanguage();
 
   return (
     <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+      {seoTitle && seoDescription && (
+        <SEOHead
+          title={seoTitle}
+          description={seoDescription}
+          canonicalPath={canonicalPath}
+          schemaType="MathSolver"
+          faqs={faqs}
+        />
+      )}
+
       {/* Breadcrumbs for SEO */}
       <nav aria-label="Breadcrumb" className="mb-4">
         <ol className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-zinc-400">

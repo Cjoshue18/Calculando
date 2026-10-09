@@ -225,6 +225,14 @@
     "decimalExplanation": "In payroll management, internship time logs, and freelance invoicing, minutes must be expressed in base 100. For example, 7 hours and 30 minutes equal 7.50 hours (30 ÷ 60 = 0.50).",
     "historyTitle": "Time calculation history"
   },
+  "igv": {
+    "title": "Peru IGV 18% & Detractions",
+    "description": "Instant breakdown of taxable amount + 18% IGV and Sunat detraction withholdings."
+  },
+  "tea": {
+    "title": "TEA / TCEA Loan Simulator",
+    "description": "Simulate loan payments, insurance fees, and amortization schedules."
+  },
   "privacyPage": {
     "title": "Privacy Policy",
     "subtitle": "Privacy commitment, local execution, and advertising cookies policy.",

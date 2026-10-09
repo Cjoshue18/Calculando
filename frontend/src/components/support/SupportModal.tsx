@@ -100,7 +100,7 @@ export const SupportModal: React.FC<SupportModalProps> = ({ isOpen, onClose }) =
                 </span>
 
                 <a
-                  href="https://buymeacoffee.com/cjoshue18"
+                  href="https://buymeacoffee.com/calculando"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-[#FFDD00] hover:bg-[#ffe733] text-black font-bold text-sm tracking-tight border border-black/20 shadow-sm hover:shadow-md transition-all transform hover:-translate-y-0.5 active:translate-y-0"

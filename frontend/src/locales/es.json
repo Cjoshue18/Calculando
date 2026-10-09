@@ -225,6 +225,14 @@
     "decimalExplanation": "En planillas laborales, convenios de prácticas preprofesionales y facturación freelance, los minutos deben expresarse en base 100. Por ejemplo, 7 horas y 30 minutos equivalen exactamente a 7.50 horas (30 ÷ 60 = 0.50).",
     "historyTitle": "Historial de cálculos de tiempo"
   },
+  "igv": {
+    "title": "Calculadora de IGV y Detracciones",
+    "description": "Desglose instantáneo de Base Imponible + 18% IGV y porcentaje de detracción Sunat."
+  },
+  "tea": {
+    "title": "Calculadora TEA / TCEA / Cuotas",
+    "description": "Simula cuotas bancarias en soles/dólares, seguro de desgravamen y cronograma."
+  },
   "privacyPage": {
     "title": "Política de Privacidad",
     "subtitle": "Compromiso de privacidad, procesamiento local y cookies publicitarias.",

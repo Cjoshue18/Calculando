@@ -4,8 +4,7 @@ import {
   Clock, 
   Landmark, 
   Receipt, 
-  Layers, 
-  Code2 
+  Layers
 } from 'lucide-react';
 
 export type ToolCategory = 'all' | 'academic' | 'finance' | 'time' | 'dev';
@@ -87,7 +86,9 @@ export const toolRegistry: ToolMetadata[] = [
     defaultDescriptionEn: 'Simulate loan payments, insurance fees, and amortization schedules.',
     category: 'finance',
     icon: Landmark,
-    isAvailable: false,
+    isAvailable: true,
+    badge: 'Nuevo',
+    badgeEn: 'New',
     keywords: ['prestamo', 'tea', 'tcea', 'banco', 'bcp', 'interbank', 'interes'],
   },
   {
@@ -101,21 +102,9 @@ export const toolRegistry: ToolMetadata[] = [
     defaultDescriptionEn: 'Instant breakdown of taxable amount + 18% IGV and Sunat detraction withholdings.',
     category: 'finance',
     icon: Receipt,
-    isAvailable: false,
+    isAvailable: true,
+    badge: 'Nuevo',
+    badgeEn: 'New',
     keywords: ['igv', 'sunat', 'detraccion', 'factura', 'impuestos', 'peru'],
-  },
-  {
-    id: 'mock-generator',
-    slug: '/generador-datos-mock',
-    nameKey: 'mock.title',
-    defaultNameEs: 'Dynamic Mock Data Generator',
-    defaultNameEn: 'Dynamic Mock Data Generator',
-    descriptionKey: 'mock.description',
-    defaultDescriptionEs: 'Generador de esquemas JSON/SQL y datos de prueba masivos en streaming.',
-    defaultDescriptionEn: 'Generate JSON/SQL schemas and test mock data with streaming.',
-    category: 'dev',
-    icon: Code2,
-    isAvailable: false,
-    keywords: ['mock', 'json', 'sql', 'database', 'c#', 'api'],
   },
 ];

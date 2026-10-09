@@ -9,6 +9,8 @@ import {
 import { toolRegistry, ToolCategory } from '@/core/registry/toolRegistry';
 import { useLanguage } from '@/context/LanguageContext';
 import { FloatingMathSymbols } from '@/components/home/FloatingMathSymbols';
+import { AnimatedCatalogBand } from '@/components/home/AnimatedCatalogBand';
+import { SEOHead } from '@/components/seo/SEOHead';
 
 export const HomePage: React.FC = () => {
   const { language, t } = useLanguage();
@@ -37,6 +39,13 @@ export const HomePage: React.FC = () => {
 
   return (
     <div className="flex-1 flex flex-col">
+      <SEOHead
+        title="Calculando - Cálculos rápidos. Sin rodeos."
+        description="Suite web de herramientas de cálculo académico, financiero y de tiempo. 100% precisa, rápida y sin rodeos."
+        canonicalPath="/"
+        schemaType="SoftwareApplication"
+      />
+
       {/* ══════════════════════════════════════════════════════
           1. HERO SECTION (FIGTREE TIGHT TRACKING)
          ══════════════════════════════════════════════════════ */}
@@ -82,27 +91,15 @@ export const HomePage: React.FC = () => {
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          2. ANIMATED BAND WITH CATALOG CONTROLS (SEARCH & FILTERS)
+          2. TECHNICAL BLUEPRINT BAND WITH CATALOG CONTROLS
          ══════════════════════════════════════════════════════ */}
       <section id="catalogo" className="relative w-full">
-        {/* Full-Bleed Animated Video Band */}
-        <div className="relative w-full py-12 sm:py-16 bg-[#1c384a] overflow-hidden shadow-inner flex flex-col items-center justify-center">
-          <video
-            className="absolute inset-0 w-full h-full object-cover object-top opacity-60 pointer-events-none"
-            autoPlay
-            muted
-            loop
-            playsInline
-            poster="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260826_125039_45a71f04-36dd-4620-99d8-7526316d439e.png"
-          >
-            <source
-              src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260826_125119_4963ddd4-c287-4044-b014-b68943cdd8bd.mp4"
-              type="video/mp4"
-            />
-          </video>
-          {/* Subtle gradient overlay for contrast */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1c384a]/90 via-[#234968]/75 to-[#5d95b3]/85 mix-blend-multiply" />
-          <div className="absolute inset-0 opacity-15 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]" />
+        {/* Full-Bleed Animated Wave Band (0 Video Tags, 60fps Native Canvas) */}
+        <div className="relative w-full py-12 sm:py-16 bg-[#1c384a] dark:bg-[#13222d] border-y border-[#234968] overflow-hidden shadow-inner flex flex-col items-center justify-center">
+          <AnimatedCatalogBand />
+          {/* Subtle gradient overlay & dot matrix for contrast */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#1c384a]/75 via-[#234968]/60 to-[#5d95b3]/70 mix-blend-multiply pointer-events-none" />
+          <div className="absolute inset-0 opacity-15 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
 
           {/* Controls in front of the animated band */}
           <div className="relative z-10 max-w-3xl w-full mx-auto px-4 sm:px-6 text-center text-white">
